@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>Error 404 - Stellar</title>
+    <link rel="stylesheet" href="./header.css">
+</head>
+<body>
+    <section class="header">
+        <a onclick="loading.in('./home.php')"><img id="logo" src="imgs\Stella_Logo_Small.png" alt="Stella Logo"></a>
+        <div>
+            <ul id="navbar">
+                <li><button button onclick="loading.in('./404.html')" class="active"><img class="buttons" src="imgs\Stella_Square_Logo.png" alt="Account"></img></button></li>
+                <li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Account.png" alt="Account"></img></button></li>
+                <li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs\Cart.png" alt="Cart"></img></button> </li>
+                <li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Search.png" alt="Search"></img></button></li>
+                <li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Wish.png" alt="Wish"></img></button></li>
+            </ul>
+        </div>
+    </section>
+    <div style="background-color: #f2f2f2; padding: 20px; text-align: center;font-family: NunitoSans;">
+        <h1 style="color: #ff9900;">Seems the things you're trying to find is not exist!</h1>
+        <p style="font-size: 18px; color: #333;">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.<br><sub>Error Code: 404</sub></p> 
+            <a href="home.php"><button style="background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+                Back to Home Page
+            </button></a>
+    </div>
+    <div class="loading">
+        <img id="logo" src="imgs\Stella_Logo_Small.png" alt="Stella Logo">
+    </div>
+</body>
+<script>
+    const loading = {
+        container: document.querySelector(".loading"),
+        in(target){
+            this.container.classList.remove("loading_out");
+            console.log(this.container.classList);
+            setTimeout(() => {
+                window.location.href = target;
+            }, 1000);
+        },
+        out(){
+            this.container.classList.add("loading_out")
+        }
+    };
+    window,addEventListener("load", () => {
+        loading.out()
+    })
+</script>
+</html>

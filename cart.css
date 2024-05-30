@@ -1,0 +1,22 @@
+.main{
+    margin: 20px;
+}
+
+.cart_t{
+    text-decoration: none;
+    border: 0.1;
+    text-align: center;
+}
+
+.cart_t th{
+    padding: .5em;
+}
+
+.cart_t td{
+    padding: .5em;
+}
+
+.cart_t a{
+    text-decoration: none;
+    color: #000;
+}

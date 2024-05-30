@@ -1,0 +1,103 @@
+.product-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+
+.product-info {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.product-image {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.product-image img {
+    float: right;
+}
+
+.product-info h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-info p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.product-info form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cartbtn {
+    width: 10em;
+    position: relative;
+    height: 2.5em;
+    border: 3px ridge #79ff74;
+    outline: none;
+    background-color: transparent;
+    color: black;
+    transition: 1s;
+    border-radius: 0.3em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.wishbtn {
+    width: 10em;
+    position: relative;
+    height: 2.5em;
+    border: 3px ridge #ffc260;
+    outline: none;
+    background-color: transparent;
+    color: black;
+    transition: 1s;
+    border-radius: 0.3em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cartbtn::after, .wishbtn::after {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 3%;
+    width: 95%;
+    height: 36%;
+    background-color: white;
+    transition: 0.5s;
+    transform-origin: center;
+}
+
+.cartbtn::before, .wishbtn::before {
+    content: "";
+    transform-origin: center;
+    position: absolute;
+    top: 80%;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    background-color: white;
+    transition: 0.5s;
+}
+
+.cartbtn:hover::before, .cartbtn:hover::after, .wishbtn:hover::before, .wishbtn:hover::after {
+    width: 0;
+    left:50%;
+}
+
+.cartbtn:hover {
+    box-shadow: inset 0px 0px 25px #a5ffa4;
+}
+
+.wishbtn:hover {
+    box-shadow: inset 0px 0px 25px #faeabb;
+}
