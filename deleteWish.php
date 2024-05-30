@@ -21,7 +21,7 @@
         }
 	
 	//Delete data
-	$query = "DELETE FROM wish WHERE uid='".$_COOKIE["uid"]."' AND Product_id='".$_GET['product']."'";
+	$query = "DELETE FROM wish WHERE uid='".$_COOKIE["uid"]."' AND Product_id='".$_GET['product_id']."'";
 	mysqli_query($link, $query);
     header('location:wish.php');
 ?>

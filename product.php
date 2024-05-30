@@ -37,14 +37,12 @@ $product = mysqli_fetch_assoc($result);
     <body>
         <section class="header">
         <a onclick="loading.in('./home.php')"><img id="logo" src="imgs\Stella_Logo_Small.png" alt="Stella Logo"></a>
-            <div>
-				<ul id="navbar">
-					<li><a href="404.html"><button><img class="buttons" src="imgs\Account.png" alt="Account"></img></button></a></li>
-					<li><a href="cart.php"><button><img class="buttons" src="imgs\Cart.png" alt="Cart"></img></button></a></li>
-					<li><a href="404.html"><button><img class="buttons" src="imgs\Search.png" alt="Search"></img></button></a></li>
-					<li><a href="404.html"><button><img class="buttons" src="imgs\Wish.png" alt="Wish"></img></button></a></li>
-				</ul>
-			</div>
+            <div><ul id="navbar">
+					<li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Account.png" alt="Account"></img></button></li>
+					<li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs\Cart.png" alt="Cart"></img></button> </li>
+					<li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Search.png" alt="Search"></img></button></li>
+					<li><button onclick="loading.in('./wish.php')"><img class="buttons" src="imgs\Wish.png" alt="Wish"></img></button></li>
+				</ul></div>
 		</section>
         <section class="main">
             <div class="product-container">

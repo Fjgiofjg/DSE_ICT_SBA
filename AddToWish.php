@@ -25,7 +25,7 @@
 	$product_id=$_GET['product_id'];
 
 	//Insert data
-	$query = "INSERT INTO wish (uid, Product_id, Quantity) VALUES ('".$uid."','".$product_id."','1')";
+	$query = "INSERT INTO wish (uid, Product_id) VALUES ('".$uid."','".$product_id."')";
 	mysqli_query($link, $query);
     header('location:wish.php');
 ?>

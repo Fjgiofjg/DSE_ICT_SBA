@@ -24,7 +24,7 @@
 				<li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Account.png" alt="Account"></img></button></li>
 				<li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs\Cart.png" alt="Cart"></img></button> </li>
 				<li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Search.png" alt="Search"></img></button></li>
-				<li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Wish.png" alt="Wish"></img></button></li>
+				<li><button class="active"><img class="buttons" src="imgs\Wish.png" alt="Wish"></img></button></li>
 			</ul></div>
         </section>
         <section class="main">
@@ -34,7 +34,6 @@
                 <th>Product Name</th>
             </tr>
             <?php
-            // Fetch the product data from a database or external API
 				$query_w = "SELECT * FROM wish WHERE uid='".$_COOKIE["uid"]."'";
 				$result_w = mysqli_query($link, $query_w);
 				$total=0;
@@ -48,11 +47,11 @@
                     echo "<a href='product.php?product=".$wish_t['Product_id']."'>";
                     echo $product['Product_name'];
                     echo "</a></td>";
-                    echo "<td>";
-                    echo "<button onclick=\"loading.in('./AddToCart.php?product_id=" . $product['Product_id'] . "')\" class=\"cartbtn\">Add to Cart</button>";
+                    echo "<td class='btn_td'>";
+                    echo "<button onclick=\"loading.in('./AddToCart.php?product_id=".$product['Product_id']."')\" class=\"cartbtn\">Add to Cart</button>";
                     echo "</a></td>";
-                    echo "<td>";
-                    echo "<button onclick=\"loading.in('./deleteWish.php?product_id=" . $product['Product_id'] . "')\" class=\"wishbtn\">Remove From Wish List</button>";
+                    echo "<td class='btn_td'>";
+                    echo "<button onclick=\"loading.in('./deleteWish.php?product_id=".$product['Product_id']."')\" class=\"wishbtn\">Remove From Wish List</button>";
                     echo "</a></td>";
                 }
                 echo "</table>";

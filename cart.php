@@ -22,9 +22,9 @@
 			<div>
 				<ul id="navbar">
 					<li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Account.png" alt="Account"></img></button></li>
-					<li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs\Cart.png" alt="Cart"></img></button> </li>
+					<li><button class="active" onclick="loading.in('./cart.php')"><img class="buttons" src="imgs\Cart.png" alt="Cart"></img></button> </li>
 					<li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Search.png" alt="Search"></img></button></li>
-					<li><button class="active"><img class="buttons" src="imgs\Wish.png" alt="Wish"></img></button></li>
+					<li><button onclick="loading.in('./wish.php')"><img class="buttons" src="imgs\Wish.png" alt="Wish"></img></button></li>
 				</ul>
 			</div>
 		</section>
@@ -40,9 +40,6 @@
 					</th>
 					<th>
 					Quantity
-					</th>
-					<th>
-					Delete?
 					</th>
 				</tr>
 				<?php
@@ -68,9 +65,7 @@
 							echo $cart_t['Quantity'];
 							echo "</a>";
 							echo "<td>";
-							echo "<a onclick='loading.in(\"./deleteCart.php?product=".$cart_t['Product_id']."\")'>";
-							echo "Delete";
-							echo "</a>";
+							echo "<button onclick='loading.in(\"./deleteCart.php?product=".$cart_t['Product_id']."\")')\" class=\"delbtn\">Delete</button>";
 							echo "</td>";
 							echo "</tr>";
 							$total=$total+$final_price;
