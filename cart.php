@@ -22,9 +22,9 @@
 			<div>
 				<ul id="navbar">
 					<li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Account.png" alt="Account"></img></button></li>
-					<li><button class="active"><img class="buttons" src="imgs\Cart.png" alt="Cart"></img></button> </li>
+					<li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs\Cart.png" alt="Cart"></img></button> </li>
 					<li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Search.png" alt="Search"></img></button></li>
-					<li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Wish.png" alt="Wish"></img></button></li>
+					<li><button class="active"><img class="buttons" src="imgs\Wish.png" alt="Wish"></img></button></li>
 				</ul>
 			</div>
 		</section>

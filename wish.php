@@ -52,7 +52,7 @@
                     echo "<button onclick=\"loading.in('./AddToCart.php?product_id=" . $product['Product_id'] . "')\" class=\"cartbtn\">Add to Cart</button>";
                     echo "</a></td>";
                     echo "<td>";
-                    echo "<button onclick=\"loading.in('./AddToWish.php?product_id=" . $product['Product_id'] . "')\" class=\"wishbtn\">Add to Wish List</button>";
+                    echo "<button onclick=\"loading.in('./deleteWish.php?product_id=" . $product['Product_id'] . "')\" class=\"wishbtn\">Remove From Wish List</button>";
                     echo "</a></td>";
                 }
                 echo "</table>";

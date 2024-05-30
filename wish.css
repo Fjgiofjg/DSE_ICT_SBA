@@ -31,10 +31,10 @@ th {
 }
 
 .wishbtn {
-    width: 10em;
+    width: 15em;
     position: relative;
     height: 2.5em;
-    border: 3px ridge #ffc260;
+    border: 3px ridge #ff6060;
     outline: none;
     background-color: transparent;
     color: black;
@@ -79,5 +79,5 @@ th {
 }
 
 .wishbtn:hover {
-    box-shadow: inset 0px 0px 25px #faeabb;
+    box-shadow: inset 0px 0px 25px #fabbbb;
 }

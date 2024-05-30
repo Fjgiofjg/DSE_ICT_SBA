@@ -1,5 +1,5 @@
-<?php
-    //Connect DB
+<?php 
+	//Connect db
     $server = "localhost";
     $username = "Stellar_Database";
     $DBpassword = "pwdxvbKL2YKyn6Ca";
@@ -19,13 +19,9 @@
             echo "window.location.href='login.html';";
             echo "</script>";
         }
-
-    //Prepare data
-	$uid=$_COOKIE["uid"];
-	$product_id=$_GET['product_id'];
-
-	//Insert data
-	$query = "INSERT INTO cart (uid, Product_id, Quantity) VALUES ('".$uid."','".$product_id."','1')";
+	
+	//Delete data
+	$query = "DELETE FROM wish WHERE uid='".$_COOKIE["uid"]."' AND Product_id='".$_GET['product']."'";
 	mysqli_query($link, $query);
-    header('location:cart.php');
+    header('location:wish.php');
 ?>
