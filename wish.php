@@ -49,10 +49,10 @@
                     echo "</a></td>";
                     echo "<td class='btn_td'>";
                     echo "<button onclick=\"loading.in('./AddToCart.php?product_id=".$product['Product_id']."')\" class=\"cartbtn\">Add to Cart</button>";
-                    echo "</a></td>";
+                    echo "</td>";
                     echo "<td class='btn_td'>";
                     echo "<button onclick=\"loading.in('./deleteWish.php?product_id=".$product['Product_id']."')\" class=\"wishbtn\">Remove From Wish List</button>";
-                    echo "</a></td>";
+                    echo "</td>";
                 }
                 echo "</table>";
             ?>

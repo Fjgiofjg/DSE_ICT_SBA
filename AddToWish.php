@@ -22,10 +22,21 @@
 
     //Prepare data
 	$uid=$_COOKIE["uid"];
-	$product_id=$_GET['product_id'];
+	$product_id_g=$_GET['product_id'];
 
-	//Insert data
-	$query = "INSERT INTO wish (uid, Product_id) VALUES ('".$uid."','".$product_id."')";
-	mysqli_query($link, $query);
+	//Retrive data
+    $query_r = "SELECT * FROM wish WHERE uid = " . $uid;
+    $result_r = mysqli_query($link, $query_r);
+
+    while ($row = mysqli_fetch_assoc($result_r)){
+        if ($row['Product_id']==$product_id_g){
+            header('location:404.html');
+        }
+    }
+    if ($row['Product_id']!==$product_id_g){
+    //Insert to table if no conflic
+    $query = "INSERT INTO wish (uid, Product_id) VALUES ('".$uid."','".$product_id_g."')";
+    mysqli_query($link, $query);
     header('location:wish.php');
+    }
 ?>
