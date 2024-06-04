@@ -45,7 +45,7 @@
                     <li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs\Cart.png" alt="Cart"></img></button></li>
                     <li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Search.png" alt="Search"></img></button></li>
                     <li><button onclick="loading.in('./wish.php')"><img class="buttons" src="imgs\Wish.png" alt="Wish"></img></button></li>
-                    <li><button onclick="loading.in('./confirm.php')" style="color: blue; font-size: 20px;"><!--<img class="buttons" src="imgs\Wish.png" alt="Wish"></img>--><p>OH</p></button></li>
+                    <li><button onclick="loading.in('./confirm.php')" style="color: blue; font-size: 20px;"><!--<img class="buttons" src="imgs\Conf.png" alt="Order History"></img>--><p>OH</p></button></li>
                 </ul>
             </div>
         </section>
@@ -54,7 +54,14 @@
                 <h1>Welcome To Stellar, <?php echo htmlspecialchars($user['Username']); ?> !</h1>
                 <p>Your user id is: <?php echo htmlspecialchars($user['uid']); ?>
                 <br>Your Class: <?php echo htmlspecialchars($user['Class']); ?>
-                <br>Your Class Number: <?php echo htmlspecialchars($user['Class_No']); ?></p>
+                <br>Your Class Number: <?php echo htmlspecialchars($user['Class_No']); ?>
+                <br>Your Role:<?php 
+                        if ($user['Is_Admin'] == 1) {
+                            echo ' Admin';
+                        } else {
+                            echo ' Student';
+                        }
+                    ?></p>
             </div>
             <div>
                 <h2>Change Password</h2>
@@ -68,11 +75,16 @@
                             <label for="NPW">New Password:</label>
                             <input id="NPW" name="NPW" required="" type="password" />
                         </div></div>
-                        <button class="login" name="cartbtn" type="submit" value="Register">Change Password</button>
+                        <button class="login" id="cartbtn" type="submit" value="Register">Change Password</button>
                     </form>
+                    <br><button id="LogOutBtn" onclick="loading.in('./logout.php')">Log Out</button>
                     </div>
-    </body>
-    <script>
+                    </div>
+			<div class="loading">
+			<img id="logo" src="imgs\Stella_Logo_Small.png" alt="Stella Logo">
+		</div>
+	</body>
+	<script>
 		const loading = {
 			container: document.querySelector(".loading"),
 			in(target){

@@ -57,7 +57,6 @@
 					echo '</div>';
 				}
 			?>
-		<a href='logout.php'>Logout</a>
 		</div>
 			<div class="loading">
 			<img id="logo" src="imgs\Stella_Logo_Small.png" alt="Stella Logo">
