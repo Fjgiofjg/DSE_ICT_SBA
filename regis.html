@@ -1,4 +1,46 @@
-<form action="regis.php" method="post">
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Stellar - Sign Up</title>
+  <!--<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="./regis.css">
+</head> 
+<body>
+    <form name="regis" action="regis.php" method="post">
+    <div class="screen-1">
+        <img class="logo" src="imgs\Stella_Logo_Small.png" alt="Stella Logo">
+        <div class="userid">
+          <div class="sec-2">
+            <label for="username">Username:</label> 
+            <input id="username" name="username" required="" type="text" />
+          </div>
+          <div class="sec-2">
+            <label for="uid">MOSSS ID:</label>
+            <input id="uid" name="uid" required="" type="text" />
+          </div>
+          <div class="sec-2">
+            <label for="class">Class:</label>
+            <input id="class" name="class" required="" type="text" />
+          </div>
+          <div class="sec-2">
+            <label for="class_no">Class Number:</label>
+            <input id="class_no" name="class_no" required="" type="text" />
+          </div>
+        </div>
+        <div class="password"><div class="sec-2">
+          <label for="password">Password:</label>
+          <input id="password" name="password" required="" type="password" />
+        </div></div>
+      <button class="login" name="register" type="submit" value="Register">Sign Up </button>
+    </form>
+  </div>
+</body>
+</html>
+
+
+
+<!--<form action="regis.php" method="post">
   <label for="username">Username:</label> 
   <input id="username" name="username" required="" type="text" />
 

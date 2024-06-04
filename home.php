@@ -16,16 +16,30 @@
 		<title>Stellar - Home</title>
 		<link rel="stylesheet" href="./header.css">
 		<link rel="stylesheet" href="./home.css">
+		<link rel="stylesheet" href="./owlcarousel/owl.theme.default.css">
+		<link rel="stylesheet" href="./owlcarousel/owl.carousel.min.css">
+		<link rel="stylesheet" href="./owlcarousel/owl.carousel.css">
 	</head>
+		<script src="./owlcarousel/owl.carousel.min.css"></script>
 	<body>
 		<section class="header">
 			<a onclick="loading.in('./home.php')"><img id="logo" src="imgs\Stella_Logo_Small.png" alt="Stella Logo"></a>
 			<div><ul id="navbar">
-					<li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Account.png" alt="Account"></img></button></li>
-					<li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs\Cart.png" alt="Cart"></img></button> </li>
-					<li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Search.png" alt="Search"></img></button></li>
-					<li><button onclick="loading.in('./wish.php')"><img class="buttons" src="imgs\Wish.png" alt="Wish"></img></button></li>
-				</ul></div>
+				<li><button onclick="loading.in('./acc.php')"><img class="buttons" src="imgs\Account.png" alt="Account"></img></button></li>
+                <li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs\Cart.png" alt="Cart"></img></button></li>
+                <li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Search.png" alt="Search"></img></button></li>
+                <li><button onclick="loading.in('./wish.php')"><img class="buttons" src="imgs\Wish.png" alt="Wish"></img></button></li>
+				<li><button onclick="loading.in('./confirm.php')" style="color: blue; font-size: 20px;"><!--<img class="buttons" src="imgs\Wish.png" alt="Wish"></img>--><p>OH</p></button></li>
+			</ul></div>
+		</section>
+		<section class="owl-carousel owl-theme">
+			<div> Your Content </div>
+			<div> Your Content </div>
+			<div> Your Content </div>
+			<div> Your Content </div>
+			<div> Your Content </div>
+			<div> Your Content </div>
+			<div> Your Content </div>
 		</section>
 		<div class="product-container">
 			<?php

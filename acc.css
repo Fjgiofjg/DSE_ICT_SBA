@@ -1,26 +1,3 @@
-.main{
-    margin: 20px;
-}
-
-.cart_t{
-    text-decoration: none;
-    border: 0.1;
-    text-align: center;
-}
-
-.cart_t th{
-    padding: .5em;
-}
-
-.cart_t td{
-    padding: .5em;
-}
-
-.cart_t a{
-    text-decoration: none;
-    color: #000;
-}
-
 .cartbtn {
     width: 15em;
     position: relative;
@@ -84,8 +61,4 @@
 
 .cartbtn:hover {
     box-shadow: inset 0px 0px 25px #a5ffa4;
-}
-
-.delbtn:hover {
-    box-shadow: inset 0px 0px 25px #fabbbb;
 }

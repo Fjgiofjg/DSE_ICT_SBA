@@ -20,11 +20,12 @@
         <section class="header">
 			<a onclick="loading.in('./home.php')"><img id="logo" src="imgs\Stella_Logo_Small.png" alt="Stella Logo"></a>
 			<div><ul id="navbar">
-				<li><button button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Stella_Square_Logo.png" alt="Account"></img></button></li>
+				<li><button onclick="loading.in('./acc.php')"><img class="buttons" src="imgs\Account.png" alt="Account"></img></button></li>
 				<li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Account.png" alt="Account"></img></button></li>
 				<li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs\Cart.png" alt="Cart"></img></button> </li>
 				<li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Search.png" alt="Search"></img></button></li>
-				<li><button class="active"><img class="buttons" src="imgs\Wish.png" alt="Wish"></img></button></li>
+				<li><button onclick="loading.in('./wish.php')"><img class="buttons" src="imgs\Wish.png" alt="Wish"></img></button></li>
+				<li><button onclick="loading.in('./confirm.php')" style="color: blue; font-size: 20px;"><!--<img class="buttons" src="imgs\Wish.png" alt="Wish"></img>--><p>OH</p></button></li>
 			</ul></div>
         </section>
         <section class="main">

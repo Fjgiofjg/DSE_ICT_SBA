@@ -30,5 +30,5 @@ $class_no = $_POST['class_no'];
     }
     //Insert to table if no conflic
     $query = "INSERT INTO users (Username, uid, Class, Class_No, Password) VALUES ('$username', '$uid', '$class', '$class_no', '$password')";    mysqli_query($link, $query);
-    //header('location:login.html');
+    header('location:login.html');
 ?>

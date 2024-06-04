@@ -24,6 +24,17 @@
 	$uid=$_COOKIE["uid"];
 	$product_id=$_GET['product_id'];
 
+    //Retrive data
+    $query_r = "SELECT * FROM cart WHERE uid = " . $uid;
+    $result_r = mysqli_query($link, $query_r);
+
+    //Check data conflic with exsit data
+    while ($row = mysqli_fetch_assoc($result_r)){
+        if ($row['Product_id']==$product_id){
+            header('location:694-01.html');            
+        }
+    }
+
 	//Insert data
 	$query = "INSERT INTO cart (uid, Product_id, Quantity) VALUES ('".$uid."','".$product_id."','1')";
 	mysqli_query($link, $query);

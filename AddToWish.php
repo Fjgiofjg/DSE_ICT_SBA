@@ -28,15 +28,14 @@
     $query_r = "SELECT * FROM wish WHERE uid = " . $uid;
     $result_r = mysqli_query($link, $query_r);
 
+    //Check data conflic with exsit data
     while ($row = mysqli_fetch_assoc($result_r)){
         if ($row['Product_id']==$product_id_g){
-            header('location:404.html');
+            header('location:694-01.html');
         }
     }
-    if ($row['Product_id']!==$product_id_g){
     //Insert to table if no conflic
     $query = "INSERT INTO wish (uid, Product_id) VALUES ('".$uid."','".$product_id_g."')";
     mysqli_query($link, $query);
     header('location:wish.php');
-    }
 ?>
