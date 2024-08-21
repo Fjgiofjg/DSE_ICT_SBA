@@ -58,6 +58,7 @@
                 <br>Your Role:<?php 
                         if ($user['Is_Admin'] == 1) {
                             echo ' Admin';
+                            echo '<br><button class="login" id="cartbtn" onclick="loading.in(\'./AdminHome.php\')">Admin Panel</button>';
                         } else {
                             echo ' Student';
                         }

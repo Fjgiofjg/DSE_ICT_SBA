@@ -29,8 +29,7 @@ body {
   animation-duration: 1s;
 }
 .screen-1 .logo {
-  margin: 10%;
-  margin-bottom: 25%;
+  margin: 5%;
 }
 .screen-1 .userid {
   background: white;
@@ -41,7 +40,7 @@ body {
   gap: 0.5em;
   border-radius: 20px;
   color: #4d4d4d;
-  margin-top: -3em;
+  margin-top: 1px;
 }
 .screen-1 .userid input {
   outline: none;

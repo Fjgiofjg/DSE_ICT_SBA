@@ -42,6 +42,7 @@
                     $result = mysqli_query($link, $query_r);
                     $previousRefNo = null;
                     $ord_price=0;
+                    echo '<div class="product-container">';
                     while ($row = mysqli_fetch_assoc($result)) {
                         $query_p = "SELECT * FROM products WHERE Product_id = " . $row['Product_id'];
                         $result_p = mysqli_query($link, $query_p);
@@ -53,8 +54,10 @@
                             if ($previousRefNo !== null) {
                                 // Display the total price of the previous group
                                 echo '<h3>The Final Price of this order: $' . $ord_price . '</h3>';
+                                echo '</div>';
                             }
-                            echo '===<br><h2>Order ' . $currentRefNo . '</h2>';
+                            echo "<div class='product-card'>";
+                            echo '<h2>Order ' . $currentRefNo . '</h2>';
                             $previousRefNo = $currentRefNo;
                             $ord_price = 0;
                         }
@@ -65,9 +68,10 @@
                     if ($previousRefNo !== null) {
                         // Display the total price of the last group
                         echo '<h3>The Final Price of this order: $' . $ord_price . '</h3>';
+                        echo '</div>';
                     }
                     ?>
-                    =====<br><b>Please pay in cash when you come to the Student Union Room to take your order.</b></p>
+                    <br><b>Please pay in cash when you come to the Student Union Room to take your order.</b></p>
             </section>
             
             <div class="loading">
