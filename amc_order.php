@@ -11,9 +11,20 @@
         if(!isset($_COOKIE["uid"])) {echo "<script>window.alert('Please login!');window.location.href='login.html';</script>";}
 
         $uid=$_COOKIE["uid"];
-        $query_r = "SELECT * FROM orders WHERE uid = " . $uid;
+        $query_r = "SELECT * FROM orders";
         $result_r = mysqli_query($link, $query_r);
         $order_d = mysqli_fetch_assoc($result_r);
+
+        //Check admin role
+    $uid = $_COOKIE["uid"];
+    $query_u = "SELECT * FROM users WHERE uid = " . $uid;
+    $result_u = mysqli_query($link, $query_u);
+	if ($result_u) {
+        $user = mysqli_fetch_assoc($result_u);
+    } else {
+        echo "Error: " . mysqli_error($link);
+    }
+	if ($user['Is_Admin'] == 0) {echo "<script>window.alert('You do not have access to this page! Retuning to Home Page');window.location.href='home.php';</script>";}
     ?>
 
     <html>
@@ -30,13 +41,10 @@
                     <li><button onclick="loading.in('./acc.php')"><img class="buttons" src="imgs\Account.png" alt="Account"></img></button></li>
                     <li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs\Cart.png" alt="Cart"></img></button></li>
                     <li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Search.png" alt="Search"></img></button></li>
-                    <li><button onclick="loading.in('./wish.php')"><img class="buttons" src="imgs\Wish.png" alt="Wish"></img></button></li>
-                    <li><button class='active' onclick="loading.in('./confirm.php')" style="justify-content: center; color: blue; font-size: 20px;"><!--<img class="buttons" src="imgs\Wish.png" alt="Wish"></img>--><p>OH</p></button></li>
                 </ul></div>
             </section>
             <section class="main">
-                <h1>We had accepted your order!</h1>
-                <p>the details of your orders will be show below:<br>
+                <h1>Accepted Orders</h1>
                 
                 <?php $query = "SELECT * FROM orders";
                     $result = mysqli_query($link, $query_r);
@@ -72,11 +80,10 @@
                     }
                     ?>
                     </div>
-                    <br><b>Please pay in cash when you come to the Student Union Room to take your order.</b>
             </section>
             
             <div class="loading">
-                <img id="logo" src="imgs\Stella_Logo_Small.png" alt="Stella Logo">
+                <img id="logo" src="imgs\Stella_AMC_Logo_Small.png" alt="Stella_AMC Logo">
             </div>
         </body>
         <script>

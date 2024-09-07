@@ -18,7 +18,7 @@
     } else {
         echo "Error: " . mysqli_error($link);
     }
-	if ($user['Is_Admin'] == 1) {echo "<script>window.alert('You do not have access to this page! Retuning to Home Page');window.location.href='home.php';</script>";}
+	if ($user['Is_Admin'] == 0) {echo "<script>window.alert('You do not have access to this page! Retuning to Home Page');window.location.href='home.php';</script>";}
 ?>
 
 <html>
@@ -46,7 +46,7 @@
 					<img src="imgs\Stella_AMC_Logo_Small.png" height='300px' width='300px' alt="Stella AMC Logo">
 					<h3>Account Management</h3></a>
 				</div>
-				<div class='product-card'><a onclick=>
+				<div class='product-card'><a onclick="loading.in('./amc_order.php')">
 					<img src="imgs\Stella_AMC_Logo_Small.png" height='300px' width='300px' alt="Stella AMC Logo">
 					<h3>Order Management</h3>
 				</a></div>
@@ -58,7 +58,7 @@
 			</div>
 		</div>
 		<div class="loading">
-			<img id="logo" src="imgs\Stella_AMC_Logo_Small.png" alt="Stella Logo">
+			<img id="logo" src="imgs\Stella_AMC_Logo_Small.png" alt="Stella_AMC Logo">
 		</div>
 	</body>
 	<script>
