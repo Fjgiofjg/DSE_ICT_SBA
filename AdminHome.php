@@ -9,6 +9,16 @@
         else{echo "<script>console.log('DB link successful!')</script>";}
 //Check cookie, no = login page
 	if(!isset($_COOKIE["uid"])) {echo "<script>window.alert('Please login!');window.location.href='login.html';</script>";}
+//Check admin role
+    $uid = $_COOKIE["uid"];
+    $query_u = "SELECT * FROM users WHERE uid = " . $uid;
+    $result_u = mysqli_query($link, $query_u);
+	if ($result_u) {
+        $user = mysqli_fetch_assoc($result_u);
+    } else {
+        echo "Error: " . mysqli_error($link);
+    }
+	if ($user['Is_Admin'] == 1) {echo "<script>window.alert('You do not have access to this page! Retuning to Home Page');window.location.href='home.php';</script>";}
 ?>
 
 <html>
