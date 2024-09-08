@@ -54,9 +54,11 @@
                             if ($previousRefNo !== null) {
                                 // Display the total price of the previous group
                                 echo '<h3>The Final Price of this order: $' . $ord_price . '</h3>';
+                                echo "</a>";
                                 echo '</div>';
                             }
                             echo "<div class='product-card'>";
+                            echo '<a href="receipt_pdf.php?ref_no=' . htmlspecialchars($currentRefNo) . '">';
                             echo '<h2>Order ' . $currentRefNo . '</h2>';
                             $previousRefNo = $currentRefNo;
                             $ord_price = 0;
@@ -68,6 +70,7 @@
                     if ($previousRefNo !== null) {
                         // Display the total price of the last group
                         echo '<h3>The Final Price of this order: $' . $ord_price . '</h3>';
+                        echo "</a>";
                         echo '</div>';
                     }
                     ?>
