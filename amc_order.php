@@ -110,6 +110,11 @@ if (isset($_POST['complete_order'])) {
                 if ($previousRefNo !== null) {
                     echo '<h3>Total Price: $' . $ord_price . '</h3>';
                     echo '</div>'; // Close the previous order section
+                    // Add "Mark as Done" button
+                    echo '<form method="POST" action="" style="display:inline;">
+                        <input type="hidden" name="order_ref_no" value="' . htmlspecialchars($currentRefNo) . '" />
+                        <button type="submit" name="complete_order">Mark as Done</button>
+                    </form>';
                 }
                 // Start a new order section
                 echo "<div class='product-card'>";
@@ -120,16 +125,15 @@ if (isset($_POST['complete_order'])) {
             // Display product details for the current order
             echo '<p>' . htmlspecialchars($product['Product_name']) . ' x ' . intval($row['Quantity']) . '</p>';
             $ord_price += $final_price; // Accumulate total price for the current order
-            
-            // Add "Mark as Done" button
-            echo '<form method="POST" action="" style="display:inline;">
-                    <input type="hidden" name="order_ref_no" value="' . htmlspecialchars($currentRefNo) . '" />
-                    <button type="submit" name="complete_order">Mark as Done</button>
-                </form>';
         }
         // Display the total price for the last order
         if ($previousRefNo !== null) {
             echo '<h3>Total Price: $' . $ord_price . '</h3>';
+            // Add "Mark as Done" button
+            echo '<form method="POST" action="" style="display:inline;">
+                <input type="hidden" name="order_ref_no" value="' . htmlspecialchars($currentRefNo) . '" />
+                <button type="submit" name="complete_order">Mark as Done</button>
+            </form>';
             echo '</div>'; // Close the final order section
         }
         ?>

@@ -56,7 +56,6 @@ if (isset($_GET['ref_no'])) {
                 'vpadding' => 0,
                 'hpadding' => 0,
                 'fgcolor' => array(0, 0, 0), 
-                'bgcolor' => array(255, 255, 255), 
                 'text' => false, 
                 'textalign' => 'C', 
                 'stretch' => false,
@@ -67,7 +66,7 @@ if (isset($_GET['ref_no'])) {
             // Move down slightly after title
             $this->Ln(5);
             // Align barcode to the right and make it smaller
-            $this->write1DBarcode($this->ref_no, 'C39', '', '', '', 10, 0.4, $style, 'N'); 
+            $this->write1DBarcode($this->ref_no, 'C39', '', '', '', 10, 0.5, $style, 'N'); 
             $this->Ln(5); // Add space after barcode
             
             // Draw a line under the header
