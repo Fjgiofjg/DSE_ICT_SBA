@@ -15,7 +15,6 @@ if (!$link) {
 
 // Check if the user is logged in via cookie
 if (!isset($_COOKIE["uid"])) {
-    // If not logged in, alert and redirect to the login page
     echo "<script>window.alert('Please login!'); window.location.href='login.html';</script>";
     exit; // Stop further execution
 }
@@ -37,6 +36,21 @@ if ($user['Is_Admin'] == 0) {
     echo "<script>window.alert('You do not have access to this page!\nReturning to Home Page'); window.location.href='home.php';</script>";
     exit; // Stop further execution
 }
+
+// Handle order completion
+if (isset($_POST['complete_order'])) {
+    $orderRefNo = mysqli_real_escape_string($link, $_POST['order_ref_no']);
+    
+    // Move order to done_orders
+    $moveOrderQuery = "INSERT INTO done_orders SELECT * FROM orders WHERE RefNo = '$orderRefNo'";
+    $deleteOrderQuery = "DELETE FROM orders WHERE RefNo = '$orderRefNo'";
+    
+    if (mysqli_query($link, $moveOrderQuery) && mysqli_query($link, $deleteOrderQuery)) {
+        echo "<script>window.alert('Order marked as done!');</script>";
+    } else {
+        echo "<script>window.alert('Error completing order: " . mysqli_error($link) . "');</script>";
+    }
+}
 ?>
 
 <html>
@@ -48,7 +62,7 @@ if ($user['Is_Admin'] == 0) {
 </head>
 <body>
     <section class="header">
-    <a onclick="loading.in('./AdminHome.php')"><img id="logo" src="imgs\Stella_AMC_Logo_Small.png" alt="Stella AMC Logo"></a>
+    <a onclick="loading.in('./AdminHome.php')"><img id="logo" src="imgs/Stella_AMC_Logo_Small.png" alt="Stella AMC Logo"></a>
         <div>
             <ul id="navbar">
                 <li><button onclick="loading.in('./acc.php')"><img class="buttons" src="imgs/Account.png" alt="Account"></button></li>
@@ -60,9 +74,18 @@ if ($user['Is_Admin'] == 0) {
     <section class="main">
         <h1>Accepted Orders</h1>
         
+        <!-- Search Box -->
+        <form method="GET" action="">
+            <input type="text" name="search" placeholder="Search by Order Ref No..." />
+            <button type="submit">Search</button>
+        </form>
+
         <?php
-        // Query to get all orders
-        $query = "SELECT * FROM orders";
+        // Initialize search variable
+        $search = isset($_GET['search']) ? mysqli_real_escape_string($link, $_GET['search']) : '';
+
+        // Query to get all orders, apply search if provided
+        $query = "SELECT * FROM orders" . ($search ? " WHERE RefNo LIKE '%$search%'" : "");
         $result = mysqli_query($link, $query);
         
         // Initialize variables for processing orders
@@ -97,6 +120,12 @@ if ($user['Is_Admin'] == 0) {
             // Display product details for the current order
             echo '<p>' . htmlspecialchars($product['Product_name']) . ' x ' . intval($row['Quantity']) . '</p>';
             $ord_price += $final_price; // Accumulate total price for the current order
+            
+            // Add "Mark as Done" button
+            echo '<form method="POST" action="" style="display:inline;">
+                    <input type="hidden" name="order_ref_no" value="' . htmlspecialchars($currentRefNo) . '" />
+                    <button type="submit" name="complete_order">Mark as Done</button>
+                </form>';
         }
         // Display the total price for the last order
         if ($previousRefNo !== null) {
