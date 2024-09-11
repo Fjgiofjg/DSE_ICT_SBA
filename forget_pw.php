@@ -19,9 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_query($link, $query);
     
     if (mysqli_num_rows($result) > 0) {
-        // Prepare to send request to Student Union (simulate this)
-               
-        // Simulating sending the request
+        // sending the request
         $message = "Password reset request for UID: $uid has been sent to the Student Union.";
         // log the request
         $logQuery = "INSERT INTO password_requests (uid, request_time) VALUES ('$uid', NOW())";
@@ -40,12 +38,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="./login.css">
 </head>
 <body>
     <form method="POST" action="">
-        <label for="uid">Please enter your MOSSS ID:</label>
-        <input type="text" name="uid" required>
-        <button type="submit">Send Reset Request</button>
+    <div class="screen-11">
+        <img class="logo" src="imgs/Stella_Logo_Small.png" alt="Stella Logo">
+        <div class="userid"><div class="sec-2">
+            <input type="text" name="uid" placeholder='Please enter your MOSSS ID:' required><br>
+        </div></div>
+        <button class="login" type="submit">Send Reset Request</button>
+    </div>
     </form>
 </body>
 </html>

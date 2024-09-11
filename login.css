@@ -28,11 +28,23 @@ body {
   animation-name: animatebottom;
   animation-duration: 2.5s;
 }
-.screen-1 .logo {
+
+.screen-11 {
+  background-image: radial-gradient(farthest-corner at 50% 1%, #FFFDD6, #FFB53F);
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+  box-shadow: 0 0 2em #e6e9f9;
+  gap: 2em;
+  position: relative;
+}
+.logo {
   margin: 10%;
   margin-bottom: 25%;
 }
-.screen-1 .userid {
+
+.userid {
   background: white;
   box-shadow: 0 0 2em #e6e9f9;
   padding: 1em;
@@ -43,28 +55,33 @@ body {
   color: #4d4d4d;
   margin-top: -3em;
 }
-.screen-1 .userid input {
+
+.userid input {
   outline: none;
   border: none;
   padding: auto;
 }
-.screen-1 .userid input::-moz-placeholder {
+
+.userid input::-moz-placeholder {
   color: black;
   font-size: 0.9em;
 }
-.screen-1 .userid input:-ms-input-placeholder {
+
+.userid input:-ms-input-placeholder {
   color: black;
   font-size: 0.9em;
 }
-.screen-1 .userid input::placeholder {
+
+.userid input::placeholder {
   color: black;
   font-size: 0.9em;
 }
-.screen-1 .userid ion-icon {
+
+.userid ion-icon {
   color: #4d4d4d;
   margin-bottom: -0.2em;
 }
-.screen-1 .password {
+.password {
   background: white;
   box-shadow: 0 0 2em #e6e9f9;
   padding: 1em;
@@ -74,31 +91,31 @@ body {
   border-radius: 20px;
   color: #4d4d4d;
 }
-.screen-1 .password input {
+.password input {
   outline: none;
   border: none;
   padding: auto;
 }
-.screen-1 .password input::-moz-placeholder {
+.password input::-moz-placeholder {
   color: black;
   font-size: 0.9em;
 }
-.screen-1 .password input:-ms-input-placeholder {
+.password input:-ms-input-placeholder {
   color: black;
   font-size: 0.9em;
 }
-.screen-1 .password input::placeholder {
+.password input::placeholder {
   color: black;
   font-size: 0.9em;
 }
-.screen-1 .password ion-icon {
+.password ion-icon {
   color: #4d4d4d;
   margin-bottom: -0.2em;
 }
-.screen-1 .password .show-hide {
+.password .show-hide {
   margin-right: -5em;
 }
-.screen-1 .login {
+.login {
   padding: 1em;
   background: #3e4684;
   color: white;
@@ -107,7 +124,7 @@ body {
   font-weight: 600;
   font-family: 'NunitoSans';
 }
-.screen-1 .footer {
+.footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -117,11 +134,11 @@ body {
   border: none;
   text-align: center;
 }
-.screen-1 .footer a{
+.footer a{
   color: rgb(0, 0, 0);
   text-decoration: none;
 }
-.screen-1 .footer span {
+.footer span {
   cursor: pointer;
 }
 button {

@@ -15,9 +15,12 @@ if (!$link) {
 // Get the form data 
 $username = $_POST['username']; 
 $uid = $_POST['uid']; 
-$password = $_POST['password']; 
+$plainPassword = $_POST['password']; 
 $class = $_POST['class']; 
 $class_no = $_POST['class_no']; 
+
+// Hash the password
+$hashedPassword = password_hash($plainPassword, PASSWORD_DEFAULT);
 
 	//Retrive data
     $query_r = "SELECT uid FROM users";
@@ -29,6 +32,6 @@ $class_no = $_POST['class_no'];
         }
     }
     //Insert to table if no conflic
-    $query = "INSERT INTO users (Username, uid, Class, Class_No, Password) VALUES ('$username', '$uid', '$class', '$class_no', '$password')";    mysqli_query($link, $query);
+    $query = "INSERT INTO users (Username, uid, Class, Class_No, Password) VALUES ('$username', '$uid', '$class', '$class_no', '$hashedPassword')";    mysqli_query($link, $query);
     header('location:login.html');
 ?>
