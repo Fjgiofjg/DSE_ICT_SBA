@@ -38,11 +38,11 @@
 		</section>
 		<div>
 			<div class="product-container">
-				<div class='product-card'><a onclick=>
+				<div class='product-card'><a onclick="loading.in('./amc_products.php')">
 					<img src="imgs\Stella_AMC_Logo_Small.png" height='300px' width='300px' alt="Stella AMC Logo">
 					<h3>Product Management</h3></a>
 				</div>
-				<div class='product-card'><a onclick=>
+				<div class='product-card'><a onclick="loading.in('./amc_account.php')">
 					<img src="imgs\Stella_AMC_Logo_Small.png" height='300px' width='300px' alt="Stella AMC Logo">
 					<h3>Account Management</h3></a>
 				</div>
