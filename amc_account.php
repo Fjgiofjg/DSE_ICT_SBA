@@ -29,27 +29,14 @@ if ($user['Is_Admin'] == 0) {
     exit; // Stop further execution
 }
 
-// Handle product update
-if (isset($_POST['update_product'])) {
-    $productId = mysqli_real_escape_string($link, $_POST['product_id']);
-    $productName = mysqli_real_escape_string($link, $_POST['product_name']);
-    $productPrice = mysqli_real_escape_string($link, $_POST['product_price']);
-    $productDiscount = mysqli_real_escape_string($link, $_POST['product_discount']);
-
-    // Update product query
-    $updateQuery = "UPDATE product SET Product_name='$productName', Price='$productPrice', Discount='$productDiscount' WHERE Product_id='$productId'";
-
-    if (mysqli_query($link, $updateQuery)) {
-        echo "<script>window.alert('Product updated successfully!'); window.location.href='product_list.php';</script>";
-    } else {
-        echo "<script>window.alert('Error updating product: " . mysqli_error($link) . "');</script>";
-    }
-}
+// Fetch all user accounts
+$query = "SELECT * FROM users";
+$result = mysqli_query($link, $query);
 ?>
 
 <html>
 <head>
-    <title>Update Product</title>
+    <title>Admin - Manage Accounts</title>
     <link rel="stylesheet" href="./header.css">
     <link rel="stylesheet" href="./home.css">
 </head>
@@ -65,21 +52,46 @@ if (isset($_POST['update_product'])) {
         </div>
     </section>
 
-    <div class="update-form">
-        <h2>Update Product</h2>
-        <form method="POST" action="">
-            <input type="hidden" name="product_id" value="<?php echo isset($_GET['id']) ? intval($_GET['id']) : ''; ?>">
-            <label for="product_name">Product Name:</label>
-            <input type="text" name="product_name" required>
-            <label for="product_price">Price:</label>
-            <input type="number" step="0.01" name="product_price" required>
-            <label for="product_discount">Discount (%):</label>
-            <input type="number" name="product_discount" min="0" max="100" required>
-            <button type="submit" name="update_product">Update Product</button>
-        </form>
+    <div class="account-management">
+        <h2>Manage User Accounts</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Admin</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($row['uid']); ?></td>
+                    <td><?php echo htmlspecialchars($row['username']); ?></td>
+                    <td><?php echo htmlspecialchars($row['email']); ?></td>
+                    <td><?php echo $row['Is_Admin'] ? 'Yes' : 'No'; ?></td>
+                    <td>
+                        <button onclick="editUser(<?php echo $row['uid']; ?>)">Edit</button>
+                        <button onclick="deleteUser(<?php echo $row['uid']; ?>)">Delete</button>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
     </div>
 
     <script>
+        function editUser(userId) {
+            window.location.href = 'edit_user.php?id=' + userId; // Redirect to edit page
+        }
+
+        function deleteUser(userId) {
+            if (confirm('Are you sure you want to delete this user?')) {
+                window.location.href = 'delete_user.php?id=' + userId; // Redirect to delete page
+            }
+        }
+
         // Loading animation functionality
         const loading = {
             container: document.querySelector(".loading"),
