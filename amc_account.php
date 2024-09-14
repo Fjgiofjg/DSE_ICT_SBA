@@ -39,6 +39,23 @@ $result = mysqli_query($link, $query);
     <title>Admin - Manage Accounts</title>
     <link rel="stylesheet" href="./header.css">
     <link rel="stylesheet" href="./home.css">
+    <style>
+        .account-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .account-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            width: 200px; /* Adjust as necessary */
+            text-align: center;
+        }
+        .account-card button {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <section class="header">
@@ -54,31 +71,18 @@ $result = mysqli_query($link, $query);
 
     <div class="account-management">
         <h2>Manage User Accounts</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>User ID</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Admin</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($row['uid']); ?></td>
-                    <td><?php echo htmlspecialchars($row['username']); ?></td>
-                    <td><?php echo htmlspecialchars($row['email']); ?></td>
-                    <td><?php echo $row['Is_Admin'] ? 'Yes' : 'No'; ?></td>
-                    <td>
-                        <button onclick="editUser(<?php echo $row['uid']; ?>)">Edit</button>
-                        <button onclick="deleteUser(<?php echo $row['uid']; ?>)">Delete</button>
-                    </td>
-                </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
+        <div class="account-container">
+            <?php while ($row = mysqli_fetch_assoc($result)): ?>
+            <div class="account-card">
+                <h3><?php echo htmlspecialchars($row['username']); ?></h3>
+                <p>User ID: <?php echo htmlspecialchars($row['uid']); ?></p>
+                <p>Email: <?php echo htmlspecialchars($row['email']); ?></p>
+                <p>Admin: <?php echo $row['Is_Admin'] ? 'Yes' : 'No'; ?></p>
+                <button onclick="editUser(<?php echo $row['uid']; ?>)">Edit</button>
+                <button onclick="deleteUser(<?php echo $row['uid']; ?>)">Delete</button>
+            </div>
+            <?php endwhile; ?>
+        </div>
     </div>
 
     <script>
