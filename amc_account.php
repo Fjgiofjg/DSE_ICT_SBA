@@ -39,23 +39,8 @@ $result = mysqli_query($link, $query);
     <title>Admin - Manage Accounts</title>
     <link rel="stylesheet" href="./header.css">
     <link rel="stylesheet" href="./home.css">
-    <style>
-        .account-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .account-card {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 15px;
-            width: 200px; /* Adjust as necessary */
-            text-align: center;
-        }
-        .account-card button {
-            margin-top: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="./amc_account.css">
+
 </head>
 <body>
     <section class="header">
@@ -70,19 +55,25 @@ $result = mysqli_query($link, $query);
     </section>
 
     <div class="account-management">
+    <div class="button-container">
+        <button class="prrbtn" onclick="loading.in('./404.html')">Password Reset Requests</button>
+    </div>
         <h2>Manage User Accounts</h2>
         <div class="account-container">
             <?php while ($row = mysqli_fetch_assoc($result)): ?>
             <div class="account-card">
-                <h3><?php echo htmlspecialchars($row['username']); ?></h3>
+                <h3><?php echo htmlspecialchars($row['Username']); ?></h3>
                 <p>User ID: <?php echo htmlspecialchars($row['uid']); ?></p>
-                <p>Email: <?php echo htmlspecialchars($row['email']); ?></p>
                 <p>Admin: <?php echo $row['Is_Admin'] ? 'Yes' : 'No'; ?></p>
-                <button onclick="editUser(<?php echo $row['uid']; ?>)">Edit</button>
-                <button onclick="deleteUser(<?php echo $row['uid']; ?>)">Delete</button>
+                <button class="cartbtn" onclick="editUser(<?php echo $row['uid']; ?>)">Edit</button>
+                <button class="delbtn" onclick="deleteUser(<?php echo $row['uid']; ?>)">Delete</button>
             </div>
             <?php endwhile; ?>
         </div>
+    </div>
+
+    <div class="loading">
+        <img id="logo" src="imgs/Stella_AMC_Logo_Small.png" alt="Stella AMC Logo">
     </div>
 
     <script>
@@ -98,18 +89,19 @@ $result = mysqli_query($link, $query);
 
         // Loading animation functionality
         const loading = {
-            container: document.querySelector(".loading"),
+            container: document.querySelector(".loading"), // Get the loading element
             in(target) {
-                this.container.classList.remove("loading_out");
+                this.container.classList.remove("loading_out"); // Show loading
                 setTimeout(() => {
-                    window.location.href = target;
+                    window.location.href = target; // Redirect after 500ms
                 }, 500);
             },
             out() {
-                this.container.classList.add("loading_out");
+                this.container.classList.add("loading_out"); // Hide loading
             }
         };
-
+        
+        // Hide loading animation on page load
         window.addEventListener("load", () => {
             loading.out();
         });

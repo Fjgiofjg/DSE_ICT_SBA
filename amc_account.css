@@ -1,0 +1,115 @@
+.account-management {
+    margin: 10px;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.prrbtn {
+    width:30em;
+    position: relative;
+    height: 2.5em;
+    border: 3px ridge #7494ff;
+    outline: none;
+    background-color: transparent;
+    color: black;
+    transition: 1s;
+    border-radius: 0.3em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px;
+}
+
+
+.account-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+}
+.account-card {
+    border: 3px solid #FFB53F;
+    border-radius: 23px;
+    text-align: center;
+}
+.account-card button {
+    margin-top: 10px;
+}
+
+.cartbtn {
+    width: 6em;
+    position: relative;
+    height: 2.5em;
+    border: 3px ridge #79ff74;
+    outline: none;
+    background-color: transparent;
+    color: black;
+    transition: 1s;
+    border-radius: 0.3em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 15px;
+}
+
+.delbtn {
+    width: 6em;
+    position: relative;
+    height: 2.5em;
+    border: 3px ridge #ff6060;
+    outline: none;
+    background-color: transparent;
+    color: black;
+    transition: 1s;
+    border-radius: 0.3em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 15px;
+}
+
+.cartbtn::after, .delbtn::after, .prrbtn:after {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 3%;
+    width: 95%;
+    height: 36%;
+    background-color: white;
+    transition: 0.5s;
+    transform-origin: center;
+}
+
+.cartbtn::before, .delbtn::before, .prrbtn:before {
+    content: "";
+    transform-origin: center;
+    position: absolute;
+    top: 80%;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    background-color: white;
+    transition: 0.5s;
+}
+
+.cartbtn:hover::before, .cartbtn:hover::after, .delbtn:hover::before, .delbtn:hover::after, .prrbtn:hover::before, .prrbtn:hover::after {
+    width: 0;
+    left:50%;
+}
+
+.cartbtn:hover {
+    box-shadow: inset 0px 0px 25px #a5ffa4;
+}
+
+.delbtn:hover {
+    box-shadow: inset 0px 0px 25px #fabbbb;
+}
+
+.prrbtn:hover {
+    box-shadow: inset 0px 0px 25px #90c6ff;
+}
