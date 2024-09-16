@@ -44,13 +44,13 @@ $result_r = mysqli_query($link, $query_r); // Execute the query
                 <li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs/Cart.png" alt="Cart"></button></li>
                 <li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs/Search.png" alt="Search"></button></li>
                 <li><button onclick="loading.in('./wish.php')"><img class="buttons" src="imgs/Wish.png" alt="Wish"></button></li>
-                <li><button class='active' onclick="loading.in('./confirm.php')" style="color: blue; font-size: 20px;"><p>OH</p></button></li>
+                <li><button onclick="loading.in('./confirm.php')"><img class="buttons" src="imgs/Order.png" alt="Order History"></button></li>
             </ul>
         </div>
     </section>
     <section class="main">
         <h1>Your Order Has Been Accepted!</h1>
-        <p>The details of your orders are shown below:<br>
+        <p>The details of your orders are shown below:<br>Preesing or clicking on the order number can print your order's reciept
         <?php
         // Initialize variables to track orders and prices
         $previousRefNo = null;
@@ -88,7 +88,7 @@ $result_r = mysqli_query($link, $query_r); // Execute the query
         }
         ?>
         </div>
-        <br><b>Please pay in cash when you come to the Student Union Room to take your order.</b>
+        <br><b>Please print or save the reciept to show to our members when you come to the Student Union Room to take your order.<br>The Fees will be collected in cash when you visit our room</b>
     </section>
 
     <div class="loading">

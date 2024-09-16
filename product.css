@@ -1,105 +1,152 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 95vh; /* Full viewport height */
+    overflow: hidden; /* Prevent scrolling */
+}
+
+.header {
+    margin-bottom: 20px; /* Space below the header */
+}
+
+.main {
+    display: flex;
+    padding: 20px;
+    height: calc(100vh - 60px); /* Adjust for header height */
+    overflow: hidden; /* Prevent overflow */
+}
+
 .product-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px;
+    width: 100%; /* Full width */
+    height: 95%; /* Full height */
 }
 
 .product-info {
-    flex: 1;
-    margin-right: 20px;
+    width: 30%; /* Smaller size for description box */
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 90%; /* Fixed height */
+    overflow: hidden; /* Prevent scrollbar */
 }
 
-.product-image {
-    flex: 1;
-    margin-left: 20px;
-}
-
-.product-image img {
-    float: right;
-}
-
-.product-info h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.product-info p {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.product-info form {
+.product-image-carousel {
+    width: 70%; /* Adjusted size for carousel */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; /* Stack carousel and preview */
+    align-items: center; /* Center horizontally */
+    position: relative; /* For positioning buttons */
+}
+
+.carousel {
+    width: 85%; /* Full width */
+    max-height: 85%;
+    aspect-ratio: 4 / 3; /* Maintain 4:3 ratio */
+    margin: 5px auto; /* Center carousel */
+    overflow: hidden; /* Hide overflow to prevent cropping */
+}
+
+.carousel-item img {
+    width: auto; /* Maintain original width */
+    height: 100%; /* Fixed height */
+    max-width: 100%; /* Prevent exceeding the container width */
+    object-fit: contain; /* Ensure the entire image is visible */
+    display: block; /* Center image */
+    margin: auto; /* Center image */
+}
+
+button.prev, button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+}
+
+button.prev {
+    left: 10px; /* Position on the left */
+}
+
+button.next {
+    right: 10px; /* Position on the right */
+}
+
+.product-info {
+    width: 30%; /* Smaller size for description box */
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    height: 90%; /* Fixed height */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: space-between; /* Space between elements */
+}
+
+.desc {
+    flex-grow: 1; /* Allow description to take available space */
+    overflow-y: scroll;
+}
+
+.product-info .price-buttons {
+    margin-top: auto; /* Push to the bottom */
+}
+
+.cartbtn, .wishbtn {
+    width: 90%; /* Full width buttons */
+    height: 2.5em;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 6px 0;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .cartbtn {
-    width: 10em;
-    position: relative;
-    height: 2.5em;
-    border: 3px ridge #79ff74;
-    outline: none;
-    background-color: transparent;
+    background-color: #79ff74;
     color: black;
-    transition: 1s;
-    border-radius: 0.3em;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 6px;
 }
 
 .wishbtn {
-    width: 10em;
-    position: relative;
-    height: 2.5em;
-    border: 3px ridge #ffc260;
-    outline: none;
-    background-color: transparent;
+    background-color: #ffc260;
     color: black;
-    transition: 1s;
-    border-radius: 0.3em;
-    font-size: 16px;
-    font-weight: bold;
+}
+
+.cartbtn:hover, .wishbtn:hover {
+    transform: scale(1.05);
+}
+
+.loading {
+    display: none; /* Hide loading by default */
+}
+
+.preview {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px; /* Space above preview */
+}
+
+.preview-item {
+    width: 60px; /* Fixed size for preview */
+    height: 40px; /* Fixed height for preview */
+    margin: 0 5px; /* Space between previews */
     cursor: pointer;
-    margin: 6px;
 }
 
-.cartbtn::after, .wishbtn::after {
-    content: "";
-    position: absolute;
-    top: -7px;
-    left: 3%;
-    width: 95%;
-    height: 36%;
-    background-color: white;
-    transition: 0.5s;
-    transform-origin: center;
+.preview-item img {
+    width: 100%;
+    height: 100%; /* Cover the preview */
+    object-fit: cover; /* Maintain aspect ratio */
 }
 
-.cartbtn::before, .wishbtn::before {
-    content: "";
-    transform-origin: center;
-    position: absolute;
-    top: 80%;
-    left: 3%;
-    width: 95%;
-    height: 40%;
-    background-color: white;
-    transition: 0.5s;
-}
-
-.cartbtn:hover::before, .cartbtn:hover::after, .wishbtn:hover::before, .wishbtn:hover::after {
-    width: 0;
-    left:50%;
-}
-
-.cartbtn:hover {
-    box-shadow: inset 0px 0px 25px #a5ffa4;
-}
-
-.wishbtn:hover {
-    box-shadow: inset 0px 0px 25px #faeabb;
+/* Ensure buttons do not overlap with images */
+.carousel-item img {
+    position: relative; /* Allow layering of buttons */
 }
