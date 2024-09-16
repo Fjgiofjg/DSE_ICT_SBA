@@ -27,12 +27,12 @@ if (!isset($_COOKIE["uid"])) {
 </head>
 <body>
     <section class="header">
-        <a onclick="loading.in('./home.php')"><img id="logo" src="imgs/Stella_Logo_Small.png" alt="Stella Logo"></a>
+        <a href="home.php"><img id="logo" src="imgs/Stella_Logo_Small.png" alt="Stella Logo"></a>
         <div>
             <ul id="navbar">
                 <li><button onclick="loading.in('./acc.php')"><img class="buttons" src="imgs/Account.png" alt="Account"></button></li>
                 <li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs/Cart.png" alt="Cart"></button></li>
-                <li><button onclick="loading.in('./search.php')"><img class="buttons" src="imgs/Search.png" alt="Search"></button></li>
+                <li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs/Search.png" alt="Search"></button></li>
                 <li><button onclick="loading.in('./wish.php')"><img class="buttons" src="imgs/Wish.png" alt="Wish"></button></li>
                 <li><button onclick="loading.in('./confirm.php')" style="color: blue; font-size: 20px;"><p>OH</p></button></li>
             </ul>
@@ -42,16 +42,12 @@ if (!isset($_COOKIE["uid"])) {
     <!-- Carousel -->
     <div class="carousel">
         <div class="carousel-images">
-            <div class="carousel-image"><img src="imgs/image1.jpg" alt="Image 1"></div>
-            <div class="carousel-image"><img src="imgs/image2.jpg" alt="Image 2"></div>
-            <div class="carousel-image"><img src="imgs/image3.jpg" alt="Image 3"></div>
+            <div class="carousel-image"><img src="imgs/caro1.png" alt="Image 1"></div>
+            <div class="carousel-image"><img src="imgs/caro2.jpg" alt="Image 2"></div>
+            <div class="carousel-image"><img src="imgs/caro3.jpg" alt="Image 3"></div>
         </div>
         <button class="carousel-button left" onclick="moveSlide(-1)">&#10094;</button>
         <button class="carousel-button right" onclick="moveSlide(1)">&#10095;</button>
-    </div>
-
-    <div class="loading">
-        <img id="logo" src="imgs/Stella_Logo_Small.png" alt="Stella Logo">
     </div>
 
     <script>
@@ -63,18 +59,12 @@ if (!isset($_COOKIE["uid"])) {
             const offset = -currentSlide * 100;
             document.querySelector('.carousel-images').style.transform = `translateX(${offset}%)`;
         }
-        
+
         // Optional: Auto-slide functionality
         setInterval(() => moveSlide(1), 5000); // Change slide every 5 seconds
     </script>
-    <!-- Search Box -->
-    <div class="search-container">
-        <form method="GET" action="">
-            <input type="text" name="search" placeholder="Search products..." />
-            <button type="submit">Search</button>
-        </form>
-    </div>
 
+    <!-- Product Display -->
     <div class="product-container">
         <?php
         // Fetch data based on search input
@@ -84,11 +74,11 @@ if (!isset($_COOKIE["uid"])) {
         
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<div class='product-card'>";
-                echo '<a onclick="loading.in(\'./product.php?product=' . $row['Product_id'] . '\')">';
-                    echo "<img src='Prod_img/".$row['Product_id'].".png' height='300px' width='300px' alt='".htmlspecialchars($row['Product_name'])."'>";
-                    echo '<h3>'.htmlspecialchars($row['Product_name']).'</h3>';
-                    echo '<p class="price">$'.round($row['Price'] * (1 - $row['Discount'] / 100), 1).'</p>';
-                echo "</a>";
+            echo '<a onclick="loading.in(\'./product.php?product=' . $row['Product_id'] . '\')">';
+            echo "<img src='Prod_img/".$row['Product_id'].".png' alt='".htmlspecialchars($row['Product_name'])."'>";
+            echo '<h3>'.htmlspecialchars($row['Product_name']).'</h3>';
+            echo '<p class="price">$'.round($row['Price'] * (1 - $row['Discount'] / 100), 1).'</p>';
+            echo "</a>";
             echo '</div>';
         }
         ?>
@@ -97,23 +87,24 @@ if (!isset($_COOKIE["uid"])) {
     <div class="loading">
         <img id="logo" src="imgs/Stella_Logo_Small.png" alt="Stella Logo">
     </div>
+
+    <script>
+        const loading = {
+            container: document.querySelector(".loading"),
+            in(target) {
+                this.container.classList.remove("loading_out");
+                setTimeout(() => {
+                    window.location.href = target;
+                }, 500);
+            },
+            out() {
+                this.container.classList.add("loading_out");
+            }
+        };
+
+        window.addEventListener("load", () => {
+            loading.out();
+        });
+    </script>
 </body>
-<script>
-    const loading = {
-        container: document.querySelector(".loading"),
-        in(target) {
-            this.container.classList.remove("loading_out");
-            setTimeout(() => {
-                window.location.href = target;
-            }, 500);
-        },
-        out() {
-            this.container.classList.add("loading_out");
-        }
-    };
-    
-    window.addEventListener("load", () => {
-        loading.out();
-    });
-</script>
 </html>

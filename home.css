@@ -1,3 +1,8 @@
+/* Main Container */
+.main {
+    margin: 20px;
+}
+
 /* Product Container */
 .product-container {
     display: grid;
@@ -6,7 +11,7 @@
     margin: 20px;
 }
 
-.product-container a{
+.product-container a {
     border: none;
     color: rgb(0, 0, 0);
     text-align: center;
@@ -17,11 +22,12 @@
     border-radius: 20px;
 }
 
-  /* Individual Product */
+/* Individual Product */
 .product-card {
     border: 3px solid #FFB53F;
     border-radius: 23px;
     text-align: center;
+    transition: background-color 0.3s ease;
 }
 
 .product-card img {
@@ -47,117 +53,59 @@
     color: #333;
 }
 
-.product-card:hover{
+.product-card:hover {
     background-color: #e6f7ff;
-    transition: 0.3S ease;
 }
 
-.main{
-    margin: 20px;
-}
-
-/* banner */
+/* Banner */
 .main-banner .container-fluid {
-	padding: 0px 10px;
-	margin-bottom: -24px;
+    padding: 0 10px;
+    margin-bottom: -24px;
 }
 
-/* Product Container */
-.product-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
-    margin: 20px;
+/* Carousel Styles */
+.carousel {
+    position: relative;
+    max-width: 90%; /* Responsive width */
+    max-height: 500px;
+    aspect-ratio: 16 / 9; /* Maintain 16:9 ratio */
+    overflow: hidden;
+    margin: 20px auto; /* Center carousel */
 }
 
-.product-container a{
+.carousel-images {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%; /* Use full width */
+    height: 100%; /* Use full height */
+}
+
+.carousel-image {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.carousel img {
+    width: 100%;
+    height: 100%; /* Cover the container while maintaining aspect ratio */
+    object-fit: cover; /* Maintain aspect ratio of images */
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
     border: none;
-    color: rgb(0, 0, 0);
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    padding: 20px;
-    border-radius: 20px;
-}
-
-  /* Individual Product */
-.product-card {
-    border: 3px solid #FFB53F;
-    border-radius: 23px;
-    text-align: center;
-}
-
-.product-card img {
-    max-width: 100%;
-    height: 200px;
-    object-fit: contain;
-    margin-bottom: 10px;
-}
-
-.product-card h3 {
+    cursor: pointer;
+    padding: 10px;
     font-size: 18px;
-    margin-bottom: 5px;
 }
 
-.product-card p {
-    font-size: 16px;
-    margin-bottom: 10px;
+.carousel-button.left {
+    left: 10px;
 }
 
-.product-card .price {
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
+.carousel-button.right {
+    right: 10px;
 }
-
-.product-card:hover{
-    background-color: #e6f7ff;
-    transition: 0.3S ease;
-}
-
-.main{
-    margin: 20px;
-}
-
-        /* Carousel Styles */
-        .carousel {
-            position: relative;
-            max-width: 800px;
-            margin: auto;
-            overflow: hidden;
-        }
-
-        .carousel-images {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-
-        .carousel-image {
-            min-width: 100%;
-            box-sizing: border-box;
-        }
-
-        .carousel img {
-            width: 100%;
-            height: auto;
-        }
-
-        .carousel-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.8);
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            font-size: 18px;
-        }
-
-        .carousel-button.left {
-            left: 10px;
-        }
-
-        .carousel-button.right {
-            right: 10px;
-        }
