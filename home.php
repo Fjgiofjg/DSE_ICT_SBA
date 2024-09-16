@@ -20,12 +20,10 @@ if (!isset($_COOKIE["uid"])) {
 
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stellar - Home</title>
     <link rel="stylesheet" href="./header.css">
     <link rel="stylesheet" href="./home.css">
-    <link rel="stylesheet" href="./owlcarousel/owl.theme.default.css">
-    <link rel="stylesheet" href="./owlcarousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="./owlcarousel/owl.carousel.css">
 </head>
 <body>
     <section class="header">
@@ -34,23 +32,41 @@ if (!isset($_COOKIE["uid"])) {
             <ul id="navbar">
                 <li><button onclick="loading.in('./acc.php')"><img class="buttons" src="imgs/Account.png" alt="Account"></button></li>
                 <li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs/Cart.png" alt="Cart"></button></li>
-                <li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs/Search.png" alt="Search"></button></li>
+                <li><button onclick="loading.in('./search.php')"><img class="buttons" src="imgs/Search.png" alt="Search"></button></li>
                 <li><button onclick="loading.in('./wish.php')"><img class="buttons" src="imgs/Wish.png" alt="Wish"></button></li>
                 <li><button onclick="loading.in('./confirm.php')" style="color: blue; font-size: 20px;"><p>OH</p></button></li>
             </ul>
         </div>
     </section>
 
-    <section class="owl-carousel owl-theme">
-        <div> Your Content </div>
-        <div> Your Content </div>
-        <div> Your Content </div>
-        <div> Your Content </div>
-        <div> Your Content </div>
-        <div> Your Content </div>
-        <div> Your Content </div>
-    </section>
+    <!-- Carousel -->
+    <div class="carousel">
+        <div class="carousel-images">
+            <div class="carousel-image"><img src="imgs/image1.jpg" alt="Image 1"></div>
+            <div class="carousel-image"><img src="imgs/image2.jpg" alt="Image 2"></div>
+            <div class="carousel-image"><img src="imgs/image3.jpg" alt="Image 3"></div>
+        </div>
+        <button class="carousel-button left" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="carousel-button right" onclick="moveSlide(1)">&#10095;</button>
+    </div>
 
+    <div class="loading">
+        <img id="logo" src="imgs/Stella_Logo_Small.png" alt="Stella Logo">
+    </div>
+
+    <script>
+        let currentSlide = 0;
+
+        function moveSlide(direction) {
+            const slides = document.querySelectorAll('.carousel-image');
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            const offset = -currentSlide * 100;
+            document.querySelector('.carousel-images').style.transform = `translateX(${offset}%)`;
+        }
+        
+        // Optional: Auto-slide functionality
+        setInterval(() => moveSlide(1), 5000); // Change slide every 5 seconds
+    </script>
     <!-- Search Box -->
     <div class="search-container">
         <form method="GET" action="">
