@@ -65,19 +65,22 @@ if (isset($_POST['update_product'])) {
         </div>
     </section>
 
-    <div class="update-form">
-        <h2>Update Product</h2>
-        <form method="POST" action="">
-            <input type="hidden" name="product_id" value="<?php echo isset($_GET['id']) ? intval($_GET['id']) : ''; ?>">
-            <label for="product_name">Product Name:</label>
-            <input type="text" name="product_name" required>
-            <label for="product_price">Price:</label>
-            <input type="number" step="0.01" name="product_price" required>
-            <label for="product_discount">Discount (%):</label>
-            <input type="number" name="product_discount" min="0" max="100" required>
-            <button type="submit" name="update_product">Update Product</button>
-        </form>
-    </div>
+<div class="update-form">
+    <h2>Update Product</h2>
+    <form method="POST" action="" enctype="multipart/form-data">
+        <input type="hidden" name="product_id" value="<?php echo isset($_GET['id']) ? intval($_GET['id']) : ''; ?>">
+        <label for="product_name">Product Name:</label>
+        <input type="text" name="product_name" required>
+        <label for="product_price">Price:</label>
+        <input type="number" step="0.01" name="product_price" required>
+        <label for="product_discount">Discount (%):</label>
+        <input type="number" name="product_discount" min="0" max="100" required>
+        <label for="product_image">Product Image:</label>
+        <input type="file" name="product_image" accept="image/*" required>
+        <button type="submit" name="update_product">Update Product</button>
+    </form>
+</div>
+
 
     <script>
         // Loading animation functionality
