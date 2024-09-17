@@ -123,10 +123,6 @@ button.next {
     transform: scale(1.05);
 }
 
-.loading {
-    display: none; /* Hide loading by default */
-}
-
 .preview {
     display: flex;
     justify-content: center;
