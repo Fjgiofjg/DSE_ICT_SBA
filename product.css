@@ -5,45 +5,52 @@ body {
     overflow: hidden; /* Prevent scrolling */
 }
 
-.header {
-    margin-bottom: 20px; /* Space below the header */
-}
-
 .main {
     display: flex;
     padding: 20px;
-    height: calc(100vh - 60px); /* Adjust for header height */
+    height: calc(100vh - 85px); /* Adjust for header height */
     overflow: hidden; /* Prevent overflow */
 }
 
-.product-container {
-    display: flex;
-    width: 100%; /* Full width */
-    height: 95%; /* Full height */
-}
-
 .product-info {
-    width: 30%; /* Smaller size for description box */
+    width: 50%; /* Size for description box */
+    margin-left: 5%;
     background-color: #fff;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     height: 90%; /* Fixed height */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: space-between; /* Space between elements */
     overflow: hidden; /* Prevent scrollbar */
+    float: right; 
+}
+
+.desc {
+    flex-grow: 1; /* Allow description to take available space */
+    overflow-y: scroll; /* Allow scrolling in description */
+    padding: 5px;
+    border-width: 3px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-color: #a7a7a7;
 }
 
 .product-image-carousel {
-    width: 70%; /* Adjusted size for carousel */
+    width: 45%; /* Adjusted size for carousel */
     display: flex;
     flex-direction: column; /* Stack carousel and preview */
     align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
     position: relative; /* For positioning buttons */
+    height: calc(100vh - 85px); /* Full height */
 }
 
 .carousel {
     width: 85%; /* Full width */
     max-height: 85%;
-    aspect-ratio: 4 / 3; /* Maintain 4:3 ratio */
+    aspect-ratio: 1 / 1; /* Maintain 1:1 ratio */
     margin: 5px auto; /* Center carousel */
     overflow: hidden; /* Hide overflow to prevent cropping */
 }
@@ -55,6 +62,7 @@ body {
     object-fit: contain; /* Ensure the entire image is visible */
     display: block; /* Center image */
     margin: auto; /* Center image */
+    position: relative; /* Allow layering of buttons */
 }
 
 button.prev, button.next {
@@ -74,27 +82,6 @@ button.prev {
 
 button.next {
     right: 10px; /* Position on the right */
-}
-
-.product-info {
-    width: 30%; /* Smaller size for description box */
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    height: 90%; /* Fixed height */
-    display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    justify-content: space-between; /* Space between elements */
-}
-
-.desc {
-    flex-grow: 1; /* Allow description to take available space */
-    overflow-y: scroll;
-}
-
-.product-info .price-buttons {
-    margin-top: auto; /* Push to the bottom */
 }
 
 .cartbtn, .wishbtn {
@@ -142,7 +129,74 @@ button.next {
     object-fit: cover; /* Maintain aspect ratio */
 }
 
-/* Ensure buttons do not overlap with images */
-.carousel-item img {
-    position: relative; /* Allow layering of buttons */
+.variations {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.variation {
+    padding: 10px;
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    text-align: center;
+    flex: 1; /* Flex to fill space */
+}
+
+.variation.selected {
+    border-bottom: 2px solid #007bff;
+    background-color: #e7f1ff;
+}
+
+.price-buttons {
+    flex-direction: column; /* Stack price and buttons vertically */
+    align-items: flex-start; /* Align items to the start */
+    margin-top: auto; /* Push to the bottom */
+}
+
+.final-price {
+    margin: 0; /* Remove default margin */
+}
+
+.button-container {
+    display: flex; /* Line up buttons horizontally */
+    gap: 10px; /* Space between buttons */
+    width: 100%; /* Full width for the container */
+}
+
+.cartbtn {
+    position: relative; /* For hover effect */
+}
+
+.cartbtn::after {
+    content: "Add to Cart"; /* Default text */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0; /* Hide by default */
+    transition: opacity 0.3s;
+}
+
+.cartbtn:hover::after {
+    opacity: 1; /* Show on hover */
+}
+
+.cartbtn:hover .final-price {
+    opacity: 0; /* Hide price on hover */
+}
+
+.tags {
+    display: flex;
+    gap: 5px;
+}
+
+.tag {
+    padding: 5px 10px;
+    border: 1px solid #d1d1d1;
+    border-radius: 15px;
+    background-color: #f0f0f0;
+    font-size: 14px;
 }

@@ -27,14 +27,16 @@ if (!isset($_COOKIE["uid"])) {
 </head>
 <body>
     <section class="header">
-        <a href="home.php"><img id="logo" src="imgs/Stella_Logo_Small.png" alt="Stella Logo"></a>
+        <a onclick="loading.in('./home.php')">
+            <img id="logo" src="imgs/Stella_Logo_Small.png" alt="Stella Logo">
+        </a>
         <div>
             <ul id="navbar">
                 <li><button onclick="loading.in('./acc.php')"><img class="buttons" src="imgs/Account.png" alt="Account"></button></li>
                 <li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs/Cart.png" alt="Cart"></button></li>
                 <li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs/Search.png" alt="Search"></button></li>
                 <li><button onclick="loading.in('./wish.php')"><img class="buttons" src="imgs/Wish.png" alt="Wish"></button></li>
-                <li><button onclick="loading.in('./confirm.php')"><img class="buttons" src="imgs/Order.png" alt="Order History"></button></li>
+                <li><button onclick="loading.in('./confirm.php')" style="color: blue; font-size: 20px;"><p>OH</p></button></li>
             </ul>
         </div>
     </section>
@@ -42,9 +44,13 @@ if (!isset($_COOKIE["uid"])) {
     <!-- Carousel -->
     <div class="carousel">
         <div class="carousel-images">
-            <div class="carousel-image"><img src="imgs/caro1.png" alt="Image 1"></div>
-            <div class="carousel-image"><img src="imgs/caro2.jpg" alt="Image 2"></div>
-            <div class="carousel-image"><img src="imgs/caro3.jpg" alt="Image 3"></div>
+            <?php
+            // Fetch carousel images dynamically
+            $carouselImages = glob("imgs/caro*.{jpg,png,gif}", GLOB_BRACE);
+            foreach ($carouselImages as $image) {
+                echo '<div class="carousel-image"><img src="' . htmlspecialchars($image) . '" alt="Carousel Image"></div>';
+            }
+            ?>
         </div>
         <button class="carousel-button left" onclick="moveSlide(-1)">&#10094;</button>
         <button class="carousel-button right" onclick="moveSlide(1)">&#10095;</button>

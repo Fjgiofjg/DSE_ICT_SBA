@@ -1,49 +1,92 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error 404 - Stellar</title>
     <link rel="stylesheet" href="./header.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: white;
+            color: #333;
+            text-align: center;
+        }
+        .error-container {
+            padding: 50px 20px;
+        }
+        .error-icon, .error-icon img {
+            height: 150px;
+            padding-bottom: 10px;
+        }
+        h1 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+        .error-code {
+            font-size: 18px;
+            color: #666;
+        }
+        .back-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
     <section class="header">
-        <a onclick="loading.in('./home.php')"><img id="logo" src="imgs\Stella_Logo_Small.png" alt="Stella Logo"></a>
+        <a onclick="loading.in('./home.php')">
+            <img id="logo" src="imgs/Stella_Logo_Small.png" alt="Stella Logo">
+        </a>
         <div>
             <ul id="navbar">
-                <li><button button onclick="loading.in('./404.html')" class="active"><img class="buttons" src="imgs\Stella_Square_Logo.png" alt="Account"></img></button></li>
-                <li><button onclick="loading.in('./acc.php')"><img class="buttons" src="imgs\Account.png" alt="Account"></img></button></li>
-                <li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs\Cart.png" alt="Cart"></img></button> </li>
-                <li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Search.png" alt="Search"></img></button></li>
-                <li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs\Wish.png" alt="Wish"></img></button></li>
-                <li><button onclick="loading.in('./confirm.php')" style="color: blue; font-size: 20px;"><!--<img class="buttons" src="imgs\Wish.png" alt="Wish"></img>--><p>OH</p></button></li>
+                <li><button onclick="loading.in('./acc.php')"><img class="buttons" src="imgs/Account.png" alt="Account"></button></li>
+                <li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs/Cart.png" alt="Cart"></button></li>
+                <li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs/Search.png" alt="Search"></button></li>
+                <li><button onclick="loading.in('./wish.php')"><img class="buttons" src="imgs/Wish.png" alt="Wish"></button></li>
+                <li><button onclick="loading.in('./confirm.php')" style="color: blue; font-size: 20px;"><p>OH</p></button></li>
             </ul>
         </div>
     </section>
-    <div style="background-color: #f2f2f2; padding: 20px; text-align: center;font-family: NunitoSans;">
-        <h1 style="color: #ff9900;">Seems the things you're trying to find is not exist!</h1>
-        <p style="font-size: 18px; color: #333;">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.<br><sub>Error Code: 404</sub></p> 
-            <button onclick="loading.in('./home.php')" style="background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
-                Back to Home Page
-            </button>
+    <div class="error-container">
+        <div class="error-icon"><img src="imgs/404.png" alt="404"></div>
+        <h1>Seems the things you’re trying to find is not exist!</h1>
+        <div class="error-code">Error Code: 404</div>
+        <button onclick="loading.in('./home.php')" class="back-button">Back to Home Page</button>
     </div>
     <div class="loading">
-        <img id="logo" src="imgs\Stella_Logo_Small.png" alt="Stella Logo">
+        <img id="logo" src="imgs/Stella_Logo_Small.png" alt="Stella Logo">
     </div>
+    
+    <script>
+        const loading = {
+            container: document.querySelector(".loading"),
+            in(target){
+                this.container.classList.remove("loading_out");
+                setTimeout(() => {
+                    window.location.href = target;
+                }, 1000);
+            },
+            out(){
+                this.container.classList.add("loading_out");
+            }
+        };
+        window.addEventListener("load", () => {
+            loading.out();
+        });
+    </script>
 </body>
-<script>
-    const loading = {
-        container: document.querySelector(".loading"),
-        in(target){
-            this.container.classList.remove("loading_out");
-            console.log(this.container.classList);
-            setTimeout(() => {
-                window.location.href = target;
-            }, 1000);
-        },
-        out(){
-            this.container.classList.add("loading_out")
-        }
-    };
-    window,addEventListener("load", () => {
-        loading.out()
-    })
-</script>
 </html>
