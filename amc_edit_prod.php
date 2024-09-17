@@ -1,5 +1,4 @@
 <?php
-// Database connection parameters
 $server = "localhost";
 $username = "Stellar_Database";
 $DBpassword = "pwdxvbKL2YKyn6Ca";
@@ -8,13 +7,14 @@ $database = "stellar_database";
 // Connect to the database
 $link = mysqli_connect($server, $username, $DBpassword, $database);
 if (!$link) {
-    die("Database connection failed");
+    die("Something went wrong");
+} else {
+    echo "<script>console.log('DB link successful!')</script>";
 }
 
-// Check if the product ID is set
-if (!isset($_GET['product'])) {
-    echo "<script>window.alert('No product specified.'); window.location.href='product_list.php';</script>";
-    exit;
+// Check cookie, redirect to login if not set
+if (!isset($_COOKIE["uid"])) {
+    echo "<script>window.alert('Please login!');window.location.href='login.html';</script>";
 }
 
 $productId = intval($_GET['product']);
@@ -51,13 +51,22 @@ if (isset($_POST['update_product'])) {
 
         // Handle multiple detail image uploads
         if (isset($_FILES['detail_images'])) {
-            $imageCount = count(glob("Prod_img/$productId-*")); // Count existing detail images
-
+            $existingImages = glob("Prod_img/$productId-*"); // Get existing detail images
+        
+            // Delete existing detail images
+            foreach ($existingImages as $image) {
+                if (file_exists($image)) {
+                    unlink($image); // Delete the image
+                }
+            }
+        
+            $imageCount = 0; // Reset image count after deletion
+        
             foreach ($_FILES['detail_images']['tmp_name'] as $key => $tmpName) {
                 if ($_FILES['detail_images']['error'][$key] === UPLOAD_ERR_OK) {
                     $newImageName = "$productId-" . ($imageCount + 1) . ".png"; // New detail image name
                     $detailTargetPath = "Prod_img/" . $newImageName;
-
+        
                     if (move_uploaded_file($tmpName, $detailTargetPath)) {
                         $imageCount++; // Increment the image count
                     } else {
@@ -67,27 +76,46 @@ if (isset($_POST['update_product'])) {
             }
         }
 
-        // Update tags
-        if (isset($_POST['tags'])) {
-            mysqli_query($link, "DELETE FROM tags WHERE Product_id='$productId'"); // Clear existing tags
-            foreach ($_POST['tags'] as $tag) {
-                $tag = mysqli_real_escape_string($link, $tag);
-                mysqli_query($link, "INSERT INTO tags (Product_id, Tag) VALUES ('$productId', '$tag')");
-            }
-        }
+// Update tags
+if (isset($_POST['tags'])) {
+    $tags = explode(',', $_POST['tags'][0]); // Split by comma
+    mysqli_query($link, "DELETE FROM tags WHERE Product_id='$productId'");
 
-        // Update variations
-        if (isset($_POST['variations'])) {
-            mysqli_query($link, "DELETE FROM variations WHERE Product_ID='$productId'"); // Clear existing variations
-            foreach ($_POST['variations'] as $variation) {
-                $variation = mysqli_real_escape_string($link, $variation);
-                mysqli_query($link, "INSERT INTO variations (Product_ID, variation) VALUES ('$productId', '$variation')");
-            }
-        }
+    foreach ($tags as $index => $tag) {
+        $tag = mysqli_real_escape_string($link, trim($tag));
+        // Use the index as the tag_id
+        mysqli_query($link, "INSERT INTO tags (Product_id, Tag, tag_id) VALUES ('$productId', '$tag', $index)");
+    }
+}
+
+// Update variations
+if (isset($_POST['variations'])) {
+    $variations = explode(',', $_POST['variations'][0]); // Split by comma
+    mysqli_query($link, "DELETE FROM variations WHERE Product_ID='$productId'");
+
+    foreach ($variations as $index => $variation) {
+        $variation = mysqli_real_escape_string($link, trim($variation));
+        // Use the index as the var_id
+        mysqli_query($link, "INSERT INTO variations (Product_ID, variation, var_id) VALUES ('$productId', '$variation', $index)");
+    }
+}
 
         echo "<script>window.alert('Product updated successfully!'); window.location.href='amc_products.php';</script>";
     } else {
         echo "<script>window.alert('Error updating product: " . mysqli_error($link) . "');</script>";
+    }
+}
+
+// Handle product deletion
+if (isset($_POST['delete_product'])) {
+    $deleteQuery = "DELETE FROM products WHERE Product_id='$productId'";
+    if (mysqli_query($link, $deleteQuery)) {
+        // Optionally, delete associated tags and variations
+        mysqli_query($link, "DELETE FROM tags WHERE Product_id='$productId'");
+        mysqli_query($link, "DELETE FROM variations WHERE Product_ID='$productId'");
+        echo "<script>window.alert('Product deleted successfully!'); window.location.href='amc_products.php';</script>";
+    } else {
+        echo "<script>window.alert('Error deleting product: " . mysqli_error($link) . "');</script>";
     }
 }
 ?>
@@ -122,7 +150,6 @@ if (isset($_POST['update_product'])) {
         .update-form button {
             width: 100%;
             padding: 10px;
-            background-color: #007BFF;
             color: white;
             border: none;
             border-radius: 5px;
@@ -130,6 +157,16 @@ if (isset($_POST['update_product'])) {
         }
         .update-form button:hover {
             background-color: #0056b3;
+        }
+        .update_product{
+            background-color: #007BFF;
+        }
+        .delete-button {
+            background-color: red;
+            margin-top: 10px;
+        }
+        .delete-button:hover {
+            background-color: red;
         }
     </style>
 </head>
@@ -149,10 +186,11 @@ if (isset($_POST['update_product'])) {
             <label for="variations">Variations (comma separated):</label>
             <input type="text" name="variations[]" placeholder="Variation1, Variation2, Variation3">
             <label for="portfolio_image">Portfolio Image:</label>
-            <input type="file" name="portfolio_image" accept="image/*" required>
+            <input type="file" name="portfolio_image" accept="image/*" >
             <label for="detail_images">Detail Images:</label>
             <input type="file" name="detail_images[]" accept="image/*" multiple>
-            <button type="submit" name="update_product">Update Product</button>
+            <button type="submit" name="update_product" class="update_product">Update Product</button>
+            <button type="submit" name="delete_product" class="delete-button">Delete Product</button>
         </form>
     </div>
     <div class="loading">
