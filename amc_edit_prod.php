@@ -66,6 +66,25 @@ if (isset($_POST['update_product'])) {
                 }
             }
         }
+
+        // Update tags
+        if (isset($_POST['tags'])) {
+            mysqli_query($link, "DELETE FROM tags WHERE Product_id='$productId'"); // Clear existing tags
+            foreach ($_POST['tags'] as $tag) {
+                $tag = mysqli_real_escape_string($link, $tag);
+                mysqli_query($link, "INSERT INTO tags (Product_id, Tag) VALUES ('$productId', '$tag')");
+            }
+        }
+
+        // Update variations
+        if (isset($_POST['variations'])) {
+            mysqli_query($link, "DELETE FROM variations WHERE Product_ID='$productId'"); // Clear existing variations
+            foreach ($_POST['variations'] as $variation) {
+                $variation = mysqli_real_escape_string($link, $variation);
+                mysqli_query($link, "INSERT INTO variations (Product_ID, variation) VALUES ('$productId', '$variation')");
+            }
+        }
+
         echo "<script>window.alert('Product updated successfully!'); window.location.href='amc_products.php';</script>";
     } else {
         echo "<script>window.alert('Error updating product: " . mysqli_error($link) . "');</script>";
@@ -94,7 +113,7 @@ if (isset($_POST['update_product'])) {
             border-radius: 5px;
         }
         .update-form input {
-            width: 100%;
+            width: 95%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
@@ -125,6 +144,10 @@ if (isset($_POST['update_product'])) {
             <input type="number" step="0.01" name="product_price" required value="<?php echo htmlspecialchars($product['Price']); ?>">
             <label for="product_discount">Discount (%):</label>
             <input type="number" name="product_discount" min="0" max="100" required value="<?php echo htmlspecialchars($product['Discount']); ?>">
+            <label for="tags">Tags (comma separated):</label>
+            <input type="text" name="tags[]" placeholder="Tag1, Tag2, Tag3">
+            <label for="variations">Variations (comma separated):</label>
+            <input type="text" name="variations[]" placeholder="Variation1, Variation2, Variation3">
             <label for="portfolio_image">Portfolio Image:</label>
             <input type="file" name="portfolio_image" accept="image/*" required>
             <label for="detail_images">Detail Images:</label>
