@@ -32,11 +32,12 @@ $result_r = mysqli_query($link, $query_r);
 while ($row = mysqli_fetch_assoc($result_r)) {
     $product_id = $row['Product_id'];
     $quantity = $row['Quantity'];
+    $variation_id =$row['var_id'];
 
-    $query_o = "INSERT INTO orders (uid, RefNo, Product_id, Quantity) VALUES ('".$uid."','".$ref_no."','".$product_id."','".$quantity."')";
+    $query_o = "INSERT INTO orders (uid, RefNo, Product_id, Quantity, var_id) VALUES ('".$uid."','".$ref_no."','".$product_id."','".$quantity."','".$variation_id."')";
     mysqli_query($link, $query_o);
 
-    $query_d = "DELETE FROM cart WHERE uid='".$uid."' AND Product_id='".$product_id."'";
+    $query_d = "DELETE FROM cart WHERE uid='".$uid."' AND Product_id='".$product_id."' AND var_id='".$variation_id."'";
     mysqli_query($link, $query_d);
 }
 
