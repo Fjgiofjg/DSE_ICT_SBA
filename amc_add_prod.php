@@ -59,24 +59,28 @@ if (isset($_POST['add_product'])) {
         }
 
         // Update tags
-        if (isset($_POST['tags'])) {
-            $tags = explode(',', $_POST['tags'][0]); // Split by comma
+        if (isset($_POST['tags']) && !empty($_POST['tags'][0])) {
+            $tags = array_filter(array_map('trim', explode(',', $_POST['tags'][0]))); // Split by comma and trim
+            mysqli_query($link, "DELETE FROM tags WHERE Product_id='$productId'");
 
             foreach ($tags as $index => $tag) {
-                $tag = mysqli_real_escape_string($link, trim($tag));
-                $tagId = floatval("$productId.$index"); // Convert to float
-                mysqli_query($link, "INSERT INTO tags (Product_id, Tag, tag_id) VALUES ('$productId', '$tag', '$tagId')");
+                if (!empty($tag)) {
+                    $tag = mysqli_real_escape_string($link, $tag);
+                    mysqli_query($link, "INSERT INTO tags (Product_id, Tag, tag_id) VALUES ('$productId', '$tag', $index)");
+                }
             }
         }
 
         // Update variations
-        if (isset($_POST['variations'])) {
-            $variations = explode(',', $_POST['variations'][0]); // Split by comma
+        if (isset($_POST['variations']) && !empty($_POST['variations'][0])) {
+            $variations = array_filter(array_map('trim', explode(',', $_POST['variations'][0]))); // Split by comma and trim
+            mysqli_query($link, "DELETE FROM variations WHERE Product_ID='$productId'");
 
             foreach ($variations as $index => $variation) {
-                $variation = mysqli_real_escape_string($link, trim($variation));
-                $varId = floatval("$productId.$index"); // Convert to float
-                mysqli_query($link, "INSERT INTO variations (Product_ID, variation, var_id) VALUES ('$productId', '$variation', '$varId')");
+                if (!empty($variation)) {
+                    $variation = mysqli_real_escape_string($link, $variation);
+                    mysqli_query($link, "INSERT INTO variations (Product_ID, variation, var_id) VALUES ('$productId', '$variation', $index)");
+                }
             }
         }
 

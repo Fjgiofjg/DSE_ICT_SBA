@@ -3,7 +3,7 @@
     grid-template-columns: repeat(4, 1fr); /* 4 items per row */
     gap: 10px; /* Space between items */
     overflow-y: auto; /* Enable vertical scroll */
-    max-height: calc(100vh - 250px); /* Limit height for scrolling */
+    max-height: calc(100vh - 285px); /* Limit height for scrolling */
     padding: 10px;
 }
 

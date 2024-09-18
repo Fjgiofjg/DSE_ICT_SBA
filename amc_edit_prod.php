@@ -101,26 +101,28 @@ if (isset($_POST['update_product'])) {
         }
 
         // Update tags
-        if (isset($_POST['tags'])) {
-            $tags = explode(',', $_POST['tags'][0]); // Split by comma
+        if (isset($_POST['tags']) && !empty($_POST['tags'][0])) {
+            $tags = array_filter(array_map('trim', explode(',', $_POST['tags'][0]))); // Split by comma and trim
             mysqli_query($link, "DELETE FROM tags WHERE Product_id='$productId'");
 
             foreach ($tags as $index => $tag) {
-                $tag = mysqli_real_escape_string($link, trim($tag));
-                // Use the index as the tag_id
-                mysqli_query($link, "INSERT INTO tags (Product_id, Tag, tag_id) VALUES ('$productId', '$tag', $index)");
+                if (!empty($tag)) {
+                    $tag = mysqli_real_escape_string($link, $tag);
+                    mysqli_query($link, "INSERT INTO tags (Product_id, Tag, tag_id) VALUES ('$productId', '$tag', $index)");
+                }
             }
         }
 
         // Update variations
-        if (isset($_POST['variations'])) {
-            $variations = explode(',', $_POST['variations'][0]); // Split by comma
+        if (isset($_POST['variations']) && !empty($_POST['variations'][0])) {
+            $variations = array_filter(array_map('trim', explode(',', $_POST['variations'][0]))); // Split by comma and trim
             mysqli_query($link, "DELETE FROM variations WHERE Product_ID='$productId'");
 
             foreach ($variations as $index => $variation) {
-                $variation = mysqli_real_escape_string($link, trim($variation));
-                // Use the index as the var_id
-                mysqli_query($link, "INSERT INTO variations (Product_ID, variation, var_id) VALUES ('$productId', '$variation', $index)");
+                if (!empty($variation)) {
+                    $variation = mysqli_real_escape_string($link, $variation);
+                    mysqli_query($link, "INSERT INTO variations (Product_ID, variation, var_id) VALUES ('$productId', '$variation', $index)");
+                }
             }
         }
 
@@ -169,16 +171,16 @@ if (isset($_POST['delete_product'])) {
             <input type="number" name="remain_no" min="0" required value="<?php echo htmlspecialchars($product['Remain_no']); ?>">
             <label for="product_description">Description:</label>
             <textarea name="product_description" rows="4" required><?php echo htmlspecialchars($product['Product_desc']); ?></textarea>
-            <label for="tags">Tags (comma separated) (At least 1 Tag, Max 10):</label>
+            <label for="tags">Tags (comma separated) (Max 10):</label>
             <input type="text" name="tags[]" placeholder="Tag1, Tag2, Tag3" value="<?php echo implode(', ', $currentTags); ?>">
-            <label for="variations">Variations (comma separated) (At least 1 Variation, Max 10):</label>
+            <label for="variations">Variations (comma separated) (Max 10):</label>
             <input type="text" name="variations[]" placeholder="Variation1, Variation2, Variation3" value="<?php echo implode(', ', $currentVariations); ?>">
             <label for="portfolio_image">Portfolio Image:</label>
             <input type="file" name="portfolio_image" accept="image/*">
             <label for="detail_images">Detail Images:</label>
             <input type="file" name="detail_images[]" accept="image/*" multiple>
             <button type="submit" name="update_product" class="update_product">Update Product</button>
-            <button type="submit" name="delete_product" class="delete-button">Delete Product</button>
+            <button type="button" class="delete-button" onclick="confirmDelete()">Delete Product</button>
         </form>
         <button name="back" class="back" onclick="loading.in('./amc_products.php')">Back to Product Manager</button>
     </div>
@@ -187,6 +189,10 @@ if (isset($_POST['delete_product'])) {
     </div>
 
     <script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this product?");
+        }
+
         // Loading animation functionality
         const loading = {
             container: document.querySelector(".loading"),

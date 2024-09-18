@@ -49,7 +49,7 @@ if (isset($_POST['update_product'])) {
 
 <html>
 <head>
-    <title>Update Product</title>
+    <title>SAMC - Product Manager</title>
     <link rel="stylesheet" href="./header.css">
     <link rel="stylesheet" href="./home.css">
     <link rel="stylesheet" href="./amc_products.css">
@@ -66,6 +66,7 @@ if (isset($_POST['update_product'])) {
         </div>
     </section>
 
+    <h1 style="text-align: center;">Product Manager</h1>    
     <!-- Search Bar -->
     <div class="search-bar">
         <form method="GET" action="">
