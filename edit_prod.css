@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+.update-form {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.update-form input, .update-form textarea {
+    max-width: 100%;
+    min-width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.update-form button, .back {
+    width: 100%;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.update_product:hover {
+    background-color: #0056b3;
+}
+.update_product{
+    background-color: #007BFF;
+}
+.delete-button {
+    background-color: red;
+    margin-top: 10px;
+}
+.back{
+    background-color: #29ae2e;
+    margin-top: 10px;
+}
+.back:hover{
+    background-color: #6cff73;
+}
+.delete-button:hover {
+    background-color: rgb(255, 106, 106);
+}

@@ -1,0 +1,47 @@
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+    gap: 10px; /* Space between items */
+    overflow-y: auto; /* Enable vertical scroll */
+    max-height: calc(100vh - 250px); /* Limit height for scrolling */
+    padding: 10px;
+}
+
+.product-card {
+    border: 3px solid #FFB53F;
+    border-radius: 23px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar input {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.search-bar button {
+    padding: 10px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #0056b3;
+}
+
+.add{
+    max-height: 36px;
+    margin-left: 10px;
+}

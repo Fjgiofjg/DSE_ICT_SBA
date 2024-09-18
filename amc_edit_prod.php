@@ -128,47 +128,7 @@ if (isset($_POST['delete_product'])) {
     <title>Edit Product</title>
     <link rel="stylesheet" href="./header.css">
     <link rel="stylesheet" href="./home.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .update-form {
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .update-form input {
-            width: 95%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .update-form button {
-            width: 100%;
-            padding: 10px;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .update-form button:hover {
-            background-color: #0056b3;
-        }
-        .update_product{
-            background-color: #007BFF;
-        }
-        .delete-button {
-            background-color: red;
-            margin-top: 10px;
-        }
-        .delete-button:hover {
-            background-color: red;
-        }
-    </style>
+    <link rel="stylesheet" href="./edit_prod.css">
 </head>
 <body>
     <div class="update-form">
@@ -192,6 +152,7 @@ if (isset($_POST['delete_product'])) {
             <button type="submit" name="update_product" class="update_product">Update Product</button>
             <button type="submit" name="delete_product" class="delete-button">Delete Product</button>
         </form>
+        <button name="back" class="back" onclick="loading.in('./amc_products.php')">Back to Product Manager</button>
     </div>
     <div class="loading">
         <img id="logo" src="imgs/Stella_AMC_Logo_Small.png" alt="Stella Logo">

@@ -52,50 +52,7 @@ if (isset($_POST['update_product'])) {
     <title>Update Product</title>
     <link rel="stylesheet" href="./header.css">
     <link rel="stylesheet" href="./home.css">
-    <style>
-        .product-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 items per row */
-            gap: 10px; /* Space between items */
-            overflow-y: auto; /* Enable vertical scroll */
-            max-height: 400px; /* Limit height for scrolling */
-            padding: 10px;
-        }
-
-        .product-card {
-            border: 3px solid #FFB53F;
-            border-radius: 23px;
-            text-align: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .search-bar {
-            margin: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .search-bar input {
-            padding: 10px;
-            width: 300px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-
-        .search-bar button {
-            padding: 10px;
-            border: none;
-            background-color: #007BFF;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .search-bar button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="./amc_products.css">
 </head>
 <body>
     <section class="header">
@@ -115,6 +72,8 @@ if (isset($_POST['update_product'])) {
             <input type="text" name="search" placeholder="Search products..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
             <button type="submit">Search</button>
         </form>
+        <button class="add" onclick="loading.in('./amc_add_prod.php')">Add New Product</button>
+
     </div>
 
     <!-- Product Display -->
@@ -135,22 +94,6 @@ if (isset($_POST['update_product'])) {
             echo '</div>';
         }
         ?>
-    </div>
-
-    <div class="update-form">
-        <h2>Update Product</h2>
-        <form method="POST" action="" enctype="multipart/form-data">
-            <input type="hidden" name="product_id" value="<?php echo isset($_GET['id']) ? intval($_GET['id']) : ''; ?>">
-            <label for="product_name">Product Name:</label>
-            <input type="text" name="product_name" required>
-            <label for="product_price">Price:</label>
-            <input type="number" step="0.01" name="product_price" required>
-            <label for="product_discount">Discount (%):</label>
-            <input type="number" name="product_discount" min="0" max="100" required>
-            <label for="product_image">Product Image:</label>
-            <input type="file" name="product_image" accept="image/*" required>
-            <button type="submit" name="update_product">Update Product</button>
-        </form>
     </div>
 
     <div class="loading">
