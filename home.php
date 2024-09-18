@@ -34,7 +34,7 @@ if (!isset($_COOKIE["uid"])) {
             <ul id="navbar">
                 <li><button onclick="loading.in('./acc.php')"><img class="buttons" src="imgs/Account.png" alt="Account"></button></li>
                 <li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs/Cart.png" alt="Cart"></button></li>
-                <li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs/Search.png" alt="Search"></button></li>
+                <li><button onclick="loading.in('./search.php')"><img class="buttons" src="imgs/Search.png" alt="Search"></button></li>
                 <li><button onclick="loading.in('./wish.php')"><img class="buttons" src="imgs/Wish.png" alt="Wish"></button></li>
                 <li><button onclick="loading.in('./confirm.php')"><img class="buttons" src="imgs/Order.png" alt="Order History"></button></li>
             </ul>
@@ -66,18 +66,30 @@ if (!isset($_COOKIE["uid"])) {
             document.querySelector('.carousel-images').style.transform = `translateX(${offset}%)`;
         }
 
-        // Optional: Auto-slide functionality
         setInterval(() => moveSlide(1), 5000); // Change slide every 5 seconds
     </script>
 
-    <!-- Product Display -->
-    <div class="product-container">
-        <?php
-        // Fetch data based on search input
-        $search = isset($_GET['search']) ? mysqli_real_escape_string($link, $_GET['search']) : '';
-        $query = "SELECT * FROM products" . ($search ? " WHERE Product_name LIKE '%$search%'" : "");
+<!-- Product Display -->
+<h2 style='text-align: center;'>Featured Products</h2>
+<div class="product-container">
+    
+    <?php
+    // Fetch only featured products
+    $query_t = "SELECT Product_id FROM tags WHERE tag LIKE '%Featured%'";
+    $result_t = mysqli_query($link, $query_t);
+
+    // Collect Product IDs from the tags query
+    $product_ids = [];
+    while ($row_t = mysqli_fetch_assoc($result_t)) {
+        $product_ids[] = $row_t['Product_id'];
+    }
+
+    // Check if there are any featured products
+    if (!empty($product_ids)) {
+        $ids = implode(',', array_map('intval', $product_ids)); // Sanitize and create a comma-separated list
+        $query = "SELECT * FROM products WHERE Product_id IN ($ids)";
         $result = mysqli_query($link, $query);
-        
+
         while ($row = mysqli_fetch_assoc($result)) {
             echo "<div class='product-card'>";
             echo '<a onclick="loading.in(\'./product.php?product=' . $row['Product_id'] . '\')">';
@@ -87,8 +99,16 @@ if (!isset($_COOKIE["uid"])) {
             echo "</a>";
             echo '</div>';
         }
-        ?>
-    </div>
+    } else {
+        echo "<p>No featured products available at this time.</p>";
+    }
+    ?>
+</div>
+    <!-- Search Box -->
+    <form method="GET" action="search.php" style="display: flex; justify-content: center; margin: 20px;">
+        <input type="text" name="search" placeholder="Search by Product Name..." style="padding: 10px; width: 300px; border: 1px solid #ccc; border-radius: 4px;"/>
+        <button type="submit" style="padding: 10px; border: none; background-color: #007BFF; color: white; border-radius: 4px; margin-left: 10px; cursor: pointer;">Search</button>
+    </form>
 
     <div class="loading">
         <img id="logo" src="imgs/Stella_Logo_Small.png" alt="Stella Logo">

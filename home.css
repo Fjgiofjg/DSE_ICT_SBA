@@ -9,6 +9,7 @@
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
     margin: 20px;
+    align-items: center;
 }
 
 .product-container a {
@@ -20,6 +21,7 @@
     font-size: 16px;
     padding: 20px;
     border-radius: 20px;
+    align-items: center;
 }
 
 /* Individual Product */
