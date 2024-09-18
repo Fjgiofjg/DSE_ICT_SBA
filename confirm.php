@@ -21,7 +21,7 @@ if (!isset($_COOKIE["uid"])) {
 
 // Sanitize the user input from the cookie
 $uid = mysqli_real_escape_string($link, $_COOKIE["uid"]); 
-$query_r = "SELECT * FROM orders WHERE uid = '$uid'";
+$query_r = "SELECT * FROM orders WHERE uid = '$uid' ORDER BY RefNo DESC;";
 $result_r = mysqli_query($link, $query_r);
 ?>
 
@@ -61,10 +61,12 @@ $result_r = mysqli_query($link, $query_r);
             $result_v = mysqli_query($link, $query_v);
             $vari = mysqli_fetch_assoc($result_v);
 
-            $final_price = round($product["Price"] * (1 - $product["Discount"] / 100), 1);
+            $final_price = round($product["Price"] * (1 - $product["Discount"] / 100) * $row["Quantity"], 1);
             $currentRefNo = $row['RefNo'];
+            echo "<script>console.log('".$currentRefNo."')</script>";
 
             if ($currentRefNo !== $previousRefNo) {
+                
                 if ($previousRefNo !== null) {
                     echo '<h3>The Final Price of this order: $' . $ord_price . '</h3>';
                     echo '</div>'; // Close the product-container for the previous order
@@ -75,11 +77,17 @@ $result_r = mysqli_query($link, $query_r);
                 $ord_price = 0; // Reset order price
             }
 
-            echo '<p>' . htmlspecialchars($product['Product_name']) . ' - ' . $vari['variation'] . ' x ' . intval($row['Quantity']) . '</p>';
-            $ord_price += $final_price;
+            if ($vari == null) {
+                echo '<p>' . htmlspecialchars($product['Product_name']) .' x ' . intval($row['Quantity']) . '</p>';
+                $ord_price += $final_price;
+            }else{
+                echo '<p>' . htmlspecialchars($product['Product_name']) . ' - ' . $vari['variation'] . ' x ' . intval($row['Quantity']) . '</p>';
+                $ord_price += $final_price;
+            }
         }
 
         if ($previousRefNo !== null) {
+            echo "<script>console.log('previousRefNo !== null')</script>";
             echo '<h3>The Final Price of this order: $' . $ord_price . '</h3>';
             echo '</div>'; // Close the last product-container
         }

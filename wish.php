@@ -44,30 +44,30 @@ if (!isset($_COOKIE["uid"])) {
     <h1>Your Wishlist</h1>
     <?php
         // Function to display the product card
-        function displayProductCard($link, $product, $variations) {
-            echo "<div class='product-card'>";
-            echo '<a onclick="loading.in(\'./product.php?product=' . $product['Product_id'] . '\')">';
-            echo "<img src='Prod_img/" . htmlspecialchars($product['Product_id']) . ".png' alt='" . htmlspecialchars($product['Product_name']) . "'>";
-            echo '<h3>' . htmlspecialchars($product['Product_name']) . '</h3>';
-            echo '</a>';
-
-            // Display product variations
-            if (!empty($variations)) {
-                echo '<div class="variation-list">';
-                foreach ($variations as $variation) {
-                    echo '<p class="variation">' . htmlspecialchars($variation) . '</p>';
-                }
-                echo '</div>';
-            } else {
-                echo '<p class="variation">No variations available</p>';
-            }
-
-            echo '<div class="button-container">';
-            echo "<button onclick=\"loading.in('./AddToCart.php?product_id=" . $product['Product_id'] . "')\" class=\"cartbtn\">Add to Cart</button>";
-            echo "<button onclick=\"loading.in('./deleteWish.php?product_id=" . $product['Product_id'] . "')\" class=\"wishbtn\">Remove From Wish List</button>";
-            echo '</div>';
-            echo '</div>'; // Close product-card div
-        }
+        function displayProductCard($link, $product, $variations, $var_id) {
+			echo "<div class='product-card'>";
+			echo '<a onclick="loading.in(\'./product.php?product=' . $product['Product_id'] . '\')">';
+			echo "<img src='Prod_img/" . htmlspecialchars($product['Product_id']) . ".png' alt='" . htmlspecialchars($product['Product_name']) . "'>";
+			echo '<h3>' . htmlspecialchars($product['Product_name']) . '</h3>';
+			echo '</a>';
+		
+			// Display product variations
+			if (!empty($variations)) {
+				echo '<div class="variation-list">';
+				foreach ($variations as $variation) {
+					echo '<p class="variation">' . htmlspecialchars($variation) . '</p>';
+				}
+				echo '</div>';
+			} else {
+				echo '<p class="variation">No variations available</p>';
+			}
+		
+			echo '<div class="button-container">';
+			echo "<button onclick=\"loading.in('./AddToCart.php?product_id=" . $product['Product_id'] . "&variation_id=" . $var_id . "')\" class=\"cartbtn\">Add to Cart</button>";
+			echo "<button onclick=\"loading.in('./deleteWish.php?product_id=" . $product['Product_id'] . "&variation_id=" . $var_id . "')\" class=\"wishbtn\">Remove From Wish List</button>";
+			echo '</div>';
+			echo '</div>'; // Close product-card div
+		}
 
         // Fetch the user's wishlist
 		$query_w = "SELECT * FROM wish WHERE uid='" . mysqli_real_escape_string($link, $_COOKIE["uid"]) . "'";
@@ -95,8 +95,9 @@ if (!isset($_COOKIE["uid"])) {
 							}
 						}
 
+						$var_id=$wish_t['var_id'];
 						// Display the product card with variations
-						displayProductCard($link, $product, $variations);
+						displayProductCard($link, $product, $variations,$var_id);
 					}
 				} else {
 					// Handle case where var_id is missing, if necessary

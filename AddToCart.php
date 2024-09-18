@@ -30,13 +30,13 @@
     $result_r = mysqli_query($link, $query_r);
 
     //Check data conflic with exsit data
-    
     while ($row = mysqli_fetch_assoc($result_r)) {
         if ($row['Product_id'] == $product_id && $row['var_id'] == $variation_id) {
             header('location:694-01.html');            
             exit; // Prevent further script execution
         }
     }
+    
 	//Insert data
 	$query = "INSERT INTO cart (uid, Product_id, Quantity,var_id) VALUES ('".$uid."','".$product_id."','1','".$variation_id."')";
 	mysqli_query($link, $query);

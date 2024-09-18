@@ -54,11 +54,13 @@ if (isset($_POST['update_product'])) {
     $productName = mysqli_real_escape_string($link, $_POST['product_name']);
     $productPrice = mysqli_real_escape_string($link, $_POST['product_price']);
     $productDiscount = mysqli_real_escape_string($link, $_POST['product_discount']);
-    $productDescription = strip_tags($_POST['product_description'], '<b><i><a><ul><ol><h1><h2><li>');
+    $productDescription = mysqli_real_escape_string($link, strip_tags($_POST['product_description'], '<b><i><a><ul><ol><h1><h2><li>'));
     $remainNo = intval(mysqli_real_escape_string($link, $_POST['remain_no']));
 
     // Update product details
-    $updateQuery = "UPDATE products SET Product_name='$productName', Price='$productPrice', Discount='$productDiscount', Remain_no='$remainNo' , Product_desc='$productDescription' WHERE Product_id='$productId'";
+    $updateQuery = "UPDATE products SET Product_name='$productName', Price='$productPrice', Discount='$productDiscount', Remain_no='$remainNo', Product_desc='$productDescription' WHERE Product_id='$productId'";
+
+    echo $updateQuery; // Debugging line to check the query
 
     if (mysqli_query($link, $updateQuery)) {
         // Handle portfolio image upload

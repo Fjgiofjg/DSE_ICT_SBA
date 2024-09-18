@@ -23,6 +23,7 @@
     //Prepare data
 	$uid=$_COOKIE["uid"];
 	$product_id_g=$_GET['product_id'];
+    $variation_id =$_GET['variation_id'];
 
 	//Retrive data
     $query_r = "SELECT * FROM wish WHERE uid = " . $uid;
@@ -30,12 +31,12 @@
 
     //Check data conflic with exsit data
     while ($row = mysqli_fetch_assoc($result_r)){
-        if ($row['Product_id']==$product_id_g){
+        if ($row['Product_id'] == $product_id_g && $row['var_id'] == $variation_id) {
             header('location:694-01.html');
         }
     }
     //Insert to table if no conflic
-    $query = "INSERT INTO wish (uid, Product_id) VALUES ('".$uid."','".$product_id_g."')";
+    $query = "INSERT INTO wish (uid, Product_id, var_id) VALUES ('".$uid."','".$product_id_g."', '".$variation_id."')";
     mysqli_query($link, $query);
     header('location:wish.php');
 ?>

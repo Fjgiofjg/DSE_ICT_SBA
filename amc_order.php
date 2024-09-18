@@ -58,7 +58,6 @@ if (isset($_POST['complete_order'])) {
     <title>Stellar AMC - Accepted Orders</title>
     <link rel="stylesheet" href="./header.css">
     <link rel="stylesheet" href="./home.css">
-    <script src="./owlcarousel/owl.carousel.min.css"></script>
 </head>
 <body>
     <section class="header">
@@ -85,7 +84,7 @@ if (isset($_POST['complete_order'])) {
         $search = isset($_GET['search']) ? mysqli_real_escape_string($link, $_GET['search']) : '';
 
         // Query to get all orders, apply search if provided
-        $query = "SELECT * FROM orders" . ($search ? " WHERE RefNo LIKE '%$search%'" : "");
+        $query = "SELECT * FROM orders WHERE uid = '$uid' ORDER BY RefNo DESC;" . ($search ? " WHERE RefNo LIKE '%$search%'" : "");
         $result = mysqli_query($link, $query);
         
         // Initialize variables for processing orders
@@ -99,9 +98,13 @@ if (isset($_POST['complete_order'])) {
             $query_p = "SELECT * FROM products WHERE Product_id = " . intval($row['Product_id']); // Sanitize Product_id
             $result_p = mysqli_query($link, $query_p);
             $product = mysqli_fetch_assoc($result_p);
-            
+
+            $query_v = "SELECT * FROM variations WHERE Product_ID = " .$row['Product_id']. " AND var_id = " . $row['var_id'];
+            $result_v = mysqli_query($link, $query_v);
+            $vari = mysqli_fetch_assoc($result_v);
+
             // Calculate the final price after discount
-            $final_price = round($product["Price"] * (1 - $product["Discount"] / 100), 1);
+            $final_price = round($product["Price"] * (1 - $product["Discount"] / 100) * $row["Quantity"], 1);
             $currentRefNo = $row['RefNo']; // Current order reference number
             
             // Check if we need to start a new order section
@@ -109,12 +112,13 @@ if (isset($_POST['complete_order'])) {
                 // If not the first order, display the total price of the previous order
                 if ($previousRefNo !== null) {
                     echo '<h3>Total Price: $' . $ord_price . '</h3>';
-                    echo '</div>'; // Close the previous order section
                     // Add "Mark as Done" button
                     echo '<form method="POST" action="" style="display:inline;">
                         <input type="hidden" name="order_ref_no" value="' . htmlspecialchars($currentRefNo) . '" />
                         <button type="submit" name="complete_order">Mark as Done</button>
                     </form>';
+                    echo '</div>'; // Close the previous order section
+                    echo "<script>console.log('previousRefNo !== null')</script>";
                 }
                 // Start a new order section
                 echo "<div class='product-card'>";
@@ -122,9 +126,13 @@ if (isset($_POST['complete_order'])) {
                 $previousRefNo = $currentRefNo; // Update previous reference number
                 $ord_price = 0; // Reset order price
             }
-            // Display product details for the current order
-            echo '<p>' . htmlspecialchars($product['Product_name']) . ' x ' . intval($row['Quantity']) . '</p>';
-            $ord_price += $final_price; // Accumulate total price for the current order
+            if ($vari == null) {
+                echo '<p>' . htmlspecialchars($product['Product_name']) .' x ' . intval($row['Quantity']) . '</p>';
+                $ord_price += $final_price;
+            }else{
+                echo '<p>' . htmlspecialchars($product['Product_name']) . ' - ' . $vari['variation'] . ' x ' . intval($row['Quantity']) . '</p>';
+                $ord_price += $final_price;
+            }
         }
         // Display the total price for the last order
         if ($previousRefNo !== null) {

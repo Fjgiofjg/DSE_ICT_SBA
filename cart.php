@@ -50,7 +50,7 @@ if (!isset($_COOKIE["uid"])) {
 			$query_p = "SELECT * FROM products WHERE Product_id = " . $cart_t['Product_id'];
 			$result_p = mysqli_query($link, $query_p);
 			$product = mysqli_fetch_assoc($result_p);
-			$final_price = round($product["Price"] * (1 - $product["Discount"] / 100), 1);
+			$final_price = round($product["Price"] * (1 - $product["Discount"] / 100) * $cart_t["Quantity"] , 1);
 			$total += $final_price;
 			
 			echo "<div class='product-card'>";
@@ -75,11 +75,11 @@ if (!isset($_COOKIE["uid"])) {
 			echo '<p class="price">$' . $final_price . '</p>';
 			echo '</a>';
 			echo '<div class="quantity-control">';
-			echo '<button onclick="loading.in(\'./updateQuantity.php?product=' . $cart_t['Product_id'] . '&action=decrease\')">-</button>';
+			echo '<button onclick="loading.in(\'./updateQuantity.php?product=' . $cart_t['Product_id'] . '&var_id=' . $cart_t['var_id'] . '&action=decrease\')">-</button>';
 			echo '<span>' . $cart_t['Quantity'] . '</span>';
-			echo '<button onclick="loading.in(\'./updateQuantity.php?product=' . $cart_t['Product_id'] . '&action=increase\')">+</button>';
+			echo '<button onclick="loading.in(\'./updateQuantity.php?product=' . $cart_t['Product_id'] . '&var_id=' . $cart_t['var_id'] . '&action=increase\')">+</button>';
 			echo '</div>';
-			echo '<button onclick="loading.in(\'./deleteCart.php?product=' . $cart_t['Product_id'] . '\')" id="delbtn" class="button">Delete</button>';
+			echo '<button onclick="loading.in(\'./deleteCart.php?product=' . $cart_t['Product_id'] . '&var_id=' . $cart_t['var_id'] . '\')" id="delbtn" class="button">Delete</button>';
 			echo '</div>';
 		}
 	?>
