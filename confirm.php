@@ -32,7 +32,6 @@ $result_r = mysqli_query($link, $query_r); // Execute the query
     <title>Stellar - Order History</title>
     <link rel="stylesheet" href="./header.css">
     <link rel="stylesheet" href="./home.css">
-    <script src="./owlcarousel/owl.carousel.min.js"></script>
 </head>
 <body>
     <section class="header">
