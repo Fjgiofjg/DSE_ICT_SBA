@@ -50,6 +50,7 @@ th {
     font-weight: bold;
     cursor: pointer;
     padding: 3px;
+    margin: 10px;
 }
 
 .cartbtn::after, .wishbtn::after {
@@ -87,4 +88,248 @@ th {
 
 .wishbtn:hover {
     box-shadow: inset 0px 0px 25px #fabbbb;
+}
+
+.main {
+    margin: 20px;
+}
+
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.cart-item {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.product-image {
+    width: 100px;
+    height: 100px;
+    background-color: #e2e3e5;
+    margin-right: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-details {
+    flex-grow: 1;
+}
+
+.quantity-control {
+    display: flex;                /* Enable flexbox layout */
+    align-items: center;         /* Center items vertically */
+    justify-content: center;     /* Center items horizontally */
+    gap: 10px;                   /* Optional: add space between elements */
+    margin-top: 10px;           /* Optional: Top margin for spacing */
+}
+
+.quantity-control button {
+    width: 30px;                 
+    height: 30px;               
+    background-color: #007BFF;  /* Optional: background color for buttons */
+    color: white;                /* Optional: text color for buttons */
+    border: none;                /* Optional: remove border */
+    border-radius: 5px;         /* Optional: rounded corners */
+    cursor: pointer;             /* Pointer cursor on hover */
+}
+
+.quantity-control button:hover {
+    background-color: #0056b3;  /* Optional: darker color on hover */
+}
+
+.cart_t {
+    text-decoration: none;
+    border: 0.1;
+    text-align: center;
+}
+
+.cart_t th,
+.cart_t td {
+    padding: 0.5em;
+}
+
+.cart_t a {
+    text-decoration: none;
+    color: #000;
+}
+
+/* Common Button Styles */
+.button {
+    position: relative;
+    height: 2.5em;
+    border: 3px ridge;
+    outline: none;
+    background-color: transparent;
+    color: black;
+    transition: 1s;
+    border-radius: 0.3em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 6px;
+}
+
+.button::after,
+.button::before {
+    content: " ";
+    position: absolute;
+    width: 90%;
+    background-color: white;
+    transition: 0.5s;
+    transform-origin: left;
+    left: 5%;
+}
+
+.button:hover::before,
+.button:hover::after {
+    width: 0;
+    left: 50%;
+}
+
+/* Specific Styles for Cart Button */
+#cartbtn {
+    width: 15em;
+    border-color: #79ff74;
+}
+
+#cartbtn::after {
+    top: -7px;
+    height: 36%;
+}
+
+#cartbtn::before {
+    top: 80%;
+    height: 40%;
+}
+
+#cartbtn:hover {
+    box-shadow: inset 0px 0px 25px #a5ffa4;
+}
+
+#cartbtn::after,
+#cartbtn::before {
+    content: " ";
+    position: absolute;
+    width: 90%;
+    background-color: #fff3cd;
+    transition: 0.5s;
+    transform-origin: left;
+    left: 5%;
+}
+
+#cartbtn:hover::before,
+#cartbtn:hover::after {
+    width: 0;
+    left: 50%;
+}
+
+/* Specific Styles for Delete Button */
+#delbtn {
+    width: 10em;
+    border-color: #ff6060;
+}
+
+#delbtn::after {
+    top: -7px;
+    height: 36%;
+}
+
+#delbtn::before {
+    top: 80%;
+    height: 40%;
+}
+
+#delbtn:hover {
+    box-shadow: inset 0px 0px 25px #fabbbb;
+}
+
+/* Product Card Styles */
+.product-card h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.product-card p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.product-card .price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.product-card:hover {
+    background-color: #e6f7ff;
+}
+.total-container {
+    margin-top: 20px;
+    border: 2px solid #ffcc00;
+    padding: 15px;
+    background-color: #fff3cd;
+    text-align: right;
+}
+
+/* Product Container */
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    margin: 20px;
+}
+
+.product-container a {
+    border: none;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+/* Individual Product */
+.product-card {
+    border: 3px solid #FFB53F;
+    border-radius: 23px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.product-card img {
+    max-width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.product-card h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.product-card p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.product-card .price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.product-card:hover {
+    background-color: #e6f7ff;
 }
