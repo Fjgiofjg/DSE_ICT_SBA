@@ -19,15 +19,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_query($link, $query);
     
     if (mysqli_num_rows($result) > 0) {
-        // sending the request
-        $message = "Password reset request for UID: $uid has been sent to the Student Union.";
-        // log the request
-        $logQuery = "INSERT INTO password_requests (uid, request_time) VALUES ('$uid', NOW())";
-        mysqli_query($link, $logQuery);
-        
-        echo "Your request has been sent to the Student Union! Please visit the Student Union room to continue the password reset.";
+        // Check for duplicate password reset requests
+        $checkDuplicateQuery = "SELECT * FROM password_requests WHERE uid = '$uid'";
+        $duplicateResult = mysqli_query($link, $checkDuplicateQuery);
+
+        if (mysqli_num_rows($duplicateResult) == 0) {
+            // Log the request
+            $logQuery = "INSERT INTO password_requests (uid, request_time) VALUES ('$uid', NOW())";
+            mysqli_query($link, $logQuery);
+            echo "<script>window.alert('Your request has been sent to the Student Union! Please visit the Student Union room to continue the password reset.')</script>";
+        } else {
+            echo "<script>window.alert('You have a unsettled password reset request. Please visit the Student Union room to continue the password reset.')</script>";
+        }
     } else {
-        echo "No account found with that MOSSS ID.";
+        echo "<script>window.alert('No account found with that MOSSS ID.')</script>";
     }
 }
 ?>

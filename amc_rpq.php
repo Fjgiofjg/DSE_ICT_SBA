@@ -29,18 +29,21 @@ if ($user['Is_Admin'] == 0) {
     exit; // Stop further execution
 }
 
-// Fetch all user accounts
-$query = "SELECT * FROM users";
+// Fetch all password reset requests
+$query = "SELECT * FROM password_requests";
 $result = mysqli_query($link, $query);
 ?>
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Admin - Manage Accounts</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Reset Requests</title>
     <link rel="stylesheet" href="./header.css">
     <link rel="stylesheet" href="./home.css">
     <link rel="stylesheet" href="./amc_account.css">
-
+    <link rel="stylesheet" href="./amc_rpq.css">
 </head>
 <body>
     <section class="header">
@@ -53,22 +56,21 @@ $result = mysqli_query($link, $query);
             </ul>
         </div>
     </section>
-
-    <div class="account-management">
-    <div class="button-container">
-        <button class="prrbtn" onclick="loading.in('./amc_rpq.php')">Password Reset Requests</button>
-    </div>
-        <h2>Manage User Accounts</h2>
-        <div class="account-container">
-            <?php while ($row = mysqli_fetch_assoc($result)): ?>
-            <div class="account-card">
-                <h3><?php echo htmlspecialchars($row['Username']); ?></h3>
-                <p>User ID: <?php echo htmlspecialchars($row['uid']); ?></p>
-                <p>Admin: <?php echo $row['Is_Admin'] ? 'Yes' : 'No'; ?></p>
-                <button class="cartbtn" onclick="editUser(<?php echo $row['uid']; ?>)">Edit</button>
-                <button class="delbtn" onclick="deleteUser(<?php echo $row['uid']; ?>)">Delete</button>
-            </div>
-            <?php endwhile; ?>
+    <div class="main">
+    <h2>Password Reset Requests</h2>
+        <div class="request-container">
+            <?php if (mysqli_num_rows($result) > 0): ?>
+                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                    <div class="account-card">
+                        <h3>User ID: <?php echo htmlspecialchars($row['uid']); ?></h3>
+                        <p>Request Date: <?php echo htmlspecialchars($row['request_time']); ?></p>
+                        <button class="cartbtn" onclick="handleRequest(<?php echo $row['uid']; ?>, 'approve')">Approve</button>
+                        <button class="delbtn" onclick="handleRequest(<?php echo $row['uid']; ?>, 'deny')">Deny</button>
+                    </div>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <p>There's No Requests!</p>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -77,13 +79,11 @@ $result = mysqli_query($link, $query);
     </div>
 
     <script>
-        function editUser(userId) {
-            window.location.href = 'edit_user.php?id=' + userId; // Redirect to edit page
-        }
-
-        function deleteUser(userId) {
-            if (confirm('Are you sure you want to delete this user?')) {
-                window.location.href = 'delete_user.php?id=' + userId; // Redirect to delete page
+        function handleRequest(requestId, action) {
+            if (action === 'approve' && confirm('Are you sure you want to approve this request?')) {
+                window.location.href = 'process_request.php?id=' + requestId + '&action=approve';
+            } else if (action === 'deny' && confirm('Are you sure you want to deny this request?')) {
+                window.location.href = 'process_request.php?id=' + requestId + '&action=deny';
             }
         }
 

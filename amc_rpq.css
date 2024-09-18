@@ -1,0 +1,33 @@
+.request-container {
+    display: grid;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+.request-card {
+    border: 1px solid #007BFF;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+.approve-btn, .deny-btn {
+    padding: 5px 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.approve-btn {
+    background-color: #28a745;
+}
+.deny-btn {
+    background-color: #dc3545;
+}
+.approve-btn:hover {
+    background-color: #218838;
+}
+.deny-btn:hover {
+    background-color: #c82333;
+}
