@@ -23,7 +23,7 @@ if (isset($_POST['add_product'])) {
     $productName = mysqli_real_escape_string($link, $_POST['product_name']);
     $productPrice = mysqli_real_escape_string($link, $_POST['product_price']);
     $productDiscount = mysqli_real_escape_string($link, $_POST['product_discount']);
-    $productDescription = strip_tags($_POST['product_description'], '<b><i><p><a>');
+    $productDescription = strip_tags($_POST['product_description'], '<b><i><a><ul><ol><h1><h2><li>');
     $remainNo = intval(mysqli_real_escape_string($link, $_POST['remain_no']));
 
     // Insert new product
