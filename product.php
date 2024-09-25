@@ -51,7 +51,7 @@ $productImages = glob("Prod_img/" . $productId . "-*.png");
             <ul id="navbar">
                 <li><button onclick="loading.in('./acc.php')"><img class="buttons" src="imgs/Account.png" alt="Account"></button></li>
                 <li><button onclick="loading.in('./cart.php')"><img class="buttons" src="imgs/Cart.png" alt="Cart"></button></li>
-                <li><button onclick="loading.in('./404.html')"><img class="buttons" src="imgs/Search.png" alt="Search"></button></li>
+                <li><button onclick="loading.in('./search.php')"><img class="buttons" src="imgs/Search.png" alt="Search"></button></li>
                 <li><button onclick="loading.in('./wish.php')"><img class="buttons" src="imgs/Wish.png" alt="Wish"></button></li>
                 <li><button onclick="loading.in('./confirm.php')"><img class="buttons" src="imgs/Order.png" alt="Order History"></button></li>
             </ul>
