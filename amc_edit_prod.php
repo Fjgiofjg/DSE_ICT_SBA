@@ -162,7 +162,7 @@ if (isset($_POST['delete_product'])) {
     <div class="update-form">
         <h2>Edit Product</h2>
         <form method="POST" action="" enctype="multipart/form-data">
-        <input type="hidden" name="product_id" value="<?php echo $productId; ?>">
+            <input type="hidden" name="product_id" value="<?php echo $productId; ?>">
             <label for="product_name">Product Name:</label>
             <input type="text" name="product_name" required value="<?php echo htmlspecialchars($product['Product_name']); ?>">
             <label for="product_price">Price:</label>
@@ -184,15 +184,24 @@ if (isset($_POST['delete_product'])) {
             <button type="submit" name="update_product" class="update_product">Update Product</button>
             <button type="button" class="delete-button" onclick="confirmDelete()">Delete Product</button>
         </form>
+
+        <!-- Delete Product Form -->
+        <form method="POST" action="" style="display: inline;">
+            <button type="submit" name="delete_product" class="delete_product">Confirm Delete</button>
+        </form>
+        
         <button name="back" class="back" onclick="loading.in('./amc_products.php')">Back to Product Manager</button>
     </div>
+
     <div class="loading">
         <img id="logo" src="imgs/Stella_AMC_Logo_Small.png" alt="Stella Logo">
     </div>
 
     <script>
         function confirmDelete() {
-            return confirm("Are you sure you want to delete this product?");
+            if (confirm("Are you sure you want to delete this product?")) {
+                document.querySelector('.delete_product').click();
+            }
         }
 
         // Loading animation functionality

@@ -83,8 +83,8 @@ if (isset($_POST['complete_order'])) {
         // Initialize search variable
         $search = isset($_GET['search']) ? mysqli_real_escape_string($link, $_GET['search']) : '';
 
-        // Query to get all orders, apply search if provided
-        $query = "SELECT * FROM orders WHERE uid = '$uid' ORDER BY RefNo DESC;" . ($search ? " WHERE RefNo LIKE '%$search%'" : "");
+        // Corrected query to get all orders, apply search if provided
+        $query = "SELECT * FROM orders WHERE uid = '$uid'" . ($search ? " AND RefNo LIKE '%$search%'" : "") . " ORDER BY RefNo DESC";
         $result = mysqli_query($link, $query);
         
         // Initialize variables for processing orders
@@ -118,7 +118,6 @@ if (isset($_POST['complete_order'])) {
                         <button type="submit" name="complete_order">Mark as Done</button>
                     </form>';
                     echo '</div>'; // Close the previous order section
-                    echo "<script>console.log('previousRefNo !== null')</script>";
                 }
                 // Start a new order section
                 echo "<div class='product-card'>";
@@ -129,7 +128,7 @@ if (isset($_POST['complete_order'])) {
             if ($vari == null) {
                 echo '<p>' . htmlspecialchars($product['Product_name']) .' x ' . intval($row['Quantity']) . '</p>';
                 $ord_price += $final_price;
-            }else{
+            } else {
                 echo '<p>' . htmlspecialchars($product['Product_name']) . ' - ' . $vari['variation'] . ' x ' . intval($row['Quantity']) . '</p>';
                 $ord_price += $final_price;
             }
