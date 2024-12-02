@@ -29,6 +29,10 @@ if ($action !== 'increase' && $action !== 'decrease') {
 // Fetch current quantity
 $query = "SELECT Quantity FROM cart WHERE uid='" . $_COOKIE["uid"] . "' AND Product_id=$product_id";
 $result = mysqli_query($link, $query);
+if (!$result) {
+    echo "<script>window.alert('Something went wrong! Please try again later!');window.history.back();</script>";
+    exit;
+}
 $row = mysqli_fetch_assoc($result);
 
 if ($row) {
