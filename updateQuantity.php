@@ -40,9 +40,15 @@ if ($row) {
         $new_quantity = max(0, $current_quantity - 1); // Prevent negative quantity
     }
 
-    // Update quantity in the database
-    $update_query = "UPDATE cart SET Quantity=$new_quantity WHERE uid='" . $_COOKIE["uid"] . "' AND Product_id=$product_id";
-    mysqli_query($link, $update_query);
+    if ($new_quantity > 0) {
+        // Update quantity in the database
+        $update_query = "UPDATE cart SET Quantity=$new_quantity WHERE uid='" . $_COOKIE["uid"] . "' AND Product_id=$product_id";
+        mysqli_query($link, $update_query);
+    } else {
+        // Remove product from the cart if quantity is 0
+        $delete_query = "DELETE FROM cart WHERE uid='" . $_COOKIE["uid"] . "' AND Product_id=$product_id";
+        mysqli_query($link, $delete_query);
+    }
 }
 
 // Redirect back to the cart page
